@@ -1,17 +1,37 @@
-import { LOAD_DATA } from './home.constants'
+import { LOAD_FIRST_TAB_DATA, LOAD_SECOND_TAB_DATA, LOAD_THIRD_TAB_DATA } from './home.constants';
 
-export function getData() {
-  return (dispatch) => {
-    /**
-     * fetch(url).then((response) => response.json()).then((data) => {
-     * dispatch({
-     *  type: LOAD_DATA,
-     *  rows: data
-     * })})
-     */
-    dispatch({
-      type: LOAD_DATA,
-      rows: [{ name: 'Anil', age: 28 }, { name: 'harika', age: 26 }],
-    })
-  }
+import * as homeServices from './home.service';
+
+export function getFirstTabData() {
+  return dispatch => {
+    homeServices.getFirstTabData().then(rows => {
+      dispatch({
+        type: LOAD_FIRST_TAB_DATA,
+        rows,
+      });
+    });
+  };
+}
+
+
+export function getSecondTabData() {
+  return dispatch => {
+    homeServices.getSecondTabData().then(rows => {
+      dispatch({
+        type: LOAD_SECOND_TAB_DATA,
+        rows,
+      });
+    });
+  };
+}
+
+export function getThirdTabData() {
+  return dispatch => {
+    homeServices.getThirdTabData().then(rows => {
+      dispatch({
+        type: LOAD_THIRD_TAB_DATA,
+        rows,
+      });
+    });
+  };
 }

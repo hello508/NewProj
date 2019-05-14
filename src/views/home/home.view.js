@@ -1,27 +1,45 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core'
 
-import { getData } from './home.actions'
-import { mapStateToProps } from './home.selector'
+import { getFirstTabData, getSecondTabData, getThirdTabData } from './home.actions'
+
+import Tabs from '../../components/Tabs'
+
+import homeStyle from './home.style';
 
 class HomeView extends Component {
   componentDidMount() {
-    this.props.getData()
+    this.props.getFirstTabData()
   }
+
+  onTabChange = (value) => {
+    if (value === 0) {
+      this.props.getFirstTabData();
+    } else if (value === 1) {
+      // tab 2
+      this.props.getSecondTabData();
+    } else if (value === 2) {
+      // tab 3
+      this.props.getThirdTabData();
+    }
+  };
+
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        {this.props.rows.map((row) => (
-          <div>{`${row.name} is ${row.age} Old`}</div>
-        ))}
+      <div className={classes.tabsContainer}>
+        <Tabs onTabChange={this.onTabChange}/>
       </div>
     )
   }
 }
 
 export default connect(
-  mapStateToProps,
+    () => ({}),
   {
-    getData,
+    getFirstTabData,
+    getSecondTabData,
+    getThirdTabData,
   }
-)(HomeView)
+)(withStyles(homeStyle)(HomeView))
