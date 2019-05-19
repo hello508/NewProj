@@ -1,1 +1,1 @@
-import { default } from './AlertDialog'
+export { default } from './AlertDialog';
