@@ -111,21 +111,21 @@ class SimpleTabs extends React.Component {
           <Tab
             label={
               <Badge className={classes.padding} color="secondary" badgeContent={4}>
-                Pending Approval
+                Tab One
               </Badge>
             }
             className={classes.tabItem}
           />
-          <Tab label="Approved" className={classes.tabItem} />
+          <Tab label="Tab two" className={classes.tabItem} />
           <Tab
             label={
               <Badge className={classes.padding} color="secondary" badgeContent={4}>
-                Notification
+                Tab three
               </Badge>
             }
             className={classes.tabItem}
           />
-          <Tab label="Settings" className={classes.tabItem} />
+          <Tab label="Tab Four" className={classes.tabItem} />
         </Tabs>
         {value === 0 && (
           <TabContainer>
@@ -166,8 +166,8 @@ class SimpleTabs extends React.Component {
         {value === 3 && (
           <TabContainer>
             <Tabs value={value}>
-              <Tab label="Groups" className={classes.tabItem} />
-              <Tab label="Template" className={classes.tabItem} />
+              <Tab label="Tab Five" className={classes.tabItem} />
+              <Tab label="TTab Six" className={classes.tabItem} />
             </Tabs>
           </TabContainer>
         )}

@@ -30,40 +30,36 @@ const TextFields = (props) => {
     <form className={classes.container} noValidate autoComplete="off">
       <TextField
         id="standard-name"
-        label="Created By"
+        label="Market"
         className={classes.textField}
         placeholder="Placeholder"
-        //value={this.state.name}
         margin="normal"
         disabled
       />
 
       <TextField
         id="standard-name"
-        label="Created On"
+        label="Last Name"
         className={classes.textField}
         placeholder="Placeholder"
-        //value={this.state.name}
         margin="normal"
         disabled
       />
 
       <TextField
         id="standard-name"
-        label="Responsible Groups"
+        label="Groups"
         className={classes.textField}
         placeholder="Placeholder"
-        //value={this.state.name}
         margin="normal"
         disabled
       />
 
       <TextField
         id="standard-name"
-        label="Template Name"
+        label="Address"
         className={classes.textField}
         placeholder="Placeholder"
-        //value={this.state.name}
         margin="normal"
         disabled
       />

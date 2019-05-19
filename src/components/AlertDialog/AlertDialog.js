@@ -18,8 +18,7 @@ const AlertDialog = (props) => {
         <DialogTitle id="alert-dialog-title">{'WARNING!'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to Google, even when no
-            apps are running.
+            Are you sure you want to approve the selected items?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
