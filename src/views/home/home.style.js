@@ -9,7 +9,7 @@ export default {
     margin: '10px',
     fontSize: '14px',
   },
-  approvedContainer: {
+  approvedTabContainer: {
     marginTop: '50px',
   },
-};
+}
