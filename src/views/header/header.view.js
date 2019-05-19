@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import PersonIcon from '@material-ui/icons/Person';
-import { withStyles } from '@material-ui/core';
+import React, { Component } from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import PersonIcon from '@material-ui/icons/Person'
+import { withStyles } from '@material-ui/core'
 
-import headerStyle from './header.style';
+import headerStyle from './header.style'
 
 class HeaderView extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -22,8 +22,8 @@ class HeaderView extends Component {
           </Toolbar>
         </AppBar>
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(headerStyle)(HeaderView);
+export default withStyles(headerStyle)(HeaderView)
