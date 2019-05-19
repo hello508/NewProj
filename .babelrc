@@ -12,5 +12,14 @@
     ],
     "@babel/preset-react"
   ],
-  "plugins": ["react-hot-loader/babel", ["@babel/plugin-proposal-class-properties", { "loose": true }]]
+  "plugins": [
+    "react-hot-loader/babel",
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    [
+      "babel-plugin-relative-import",
+      {
+        "rootPathSuffix": "src"
+      }
+    ]
+  ]
 }

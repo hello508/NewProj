@@ -15,12 +15,30 @@ import Button from '../Button';
 import { getColumns } from '../../common/utils';
 
 class PendingApprovalTab extends Component {
-  state = { open: false };
+  state = { open: false, selectedRows: [], selectedIndexes: [] };
 
   onToggle = () => {
     this.setState((prevState) => ({
       ...prevState,
       open: !prevState.open,
+    }));
+  };
+
+  onApprove = () => {
+    // Make API Call
+    this.props.approveRows(this.state.selectedRows);
+    this.setState((prevState) => ({
+      open: !prevState.open,
+      selectedRows: [],
+      selectedIndexes: [],
+    }));
+  };
+
+  onRowsSelected = (rows, selectedIndexes) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      selectedRows: rows,
+      selectedIndexes,
     }));
   };
 
@@ -34,8 +52,19 @@ class PendingApprovalTab extends Component {
         <Button variant="contained" color="secondary" onClick={this.handleClickOpen}>
           Reject
         </Button>
-        <AlertDialog open={this.state.open} onClose={this.onToggle} message="Approve the request" />
-        <DataGrid columns={getColumns()} rowKey="firstTabRows" />
+        <AlertDialog
+          open={this.state.open}
+          onClose={this.onToggle}
+          message="Approve the request"
+          onReject={this.onToggle}
+          onApprove={this.onApprove}
+        />
+        <DataGrid
+          columns={getColumns()}
+          rowKey="firstTabRows"
+          selectedIndexes={this.state.selectedIndexes}
+          onRowsSelected={this.onRowsSelected}
+        />
         <SimpleAppBar />
         <TextFields />
         <TextareaPage />

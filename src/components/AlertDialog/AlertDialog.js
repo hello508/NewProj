@@ -7,15 +7,17 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import PropTypes from 'prop-types';
 
-const AlertDialog = ({ open, onClose, onAccept, onReject, message }) => (
+const AlertDialog = ({ open, onClose, onApprove, onReject, message }) => (
   <Dialog open={open} onClose={onClose}>
     <DialogTitle>{'WARNING!'}</DialogTitle>
     <DialogContent>
       <DialogContentText>{message}</DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Button color="primary">Disagree</Button>
-      <Button color="primary" autoFocus>
+      <Button color="primary" onClick={onReject}>
+        Disagree
+      </Button>
+      <Button color="primary" autoFocus onClick={onApprove}>
         Agree
       </Button>
     </DialogActions>
@@ -25,7 +27,7 @@ const AlertDialog = ({ open, onClose, onAccept, onReject, message }) => (
 AlertDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
-  onAccept: PropTypes.func,
+  onApprove: PropTypes.func,
   onReject: PropTypes.func,
   message: PropTypes.string,
 };

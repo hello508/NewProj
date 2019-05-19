@@ -21,7 +21,7 @@ function createFakeRow(index) {
 }
 
 export default function createRowData(count) {
-  return [...Array(count).keys()].map(i => createFakeRow(i));
+  return [...Array(count).keys()].map((i) => createFakeRow(i));
 }
 
 export function getFirstTabData() {
@@ -34,4 +34,9 @@ export function getSecondTabData() {
 
 export function getThirdTabData() {
   return Promise.resolve(createRowData(300));
+}
+
+export function approveRows() {
+  // fetch(URL_CONFIG)
+  return Promise.resolve({ success: true });
 }

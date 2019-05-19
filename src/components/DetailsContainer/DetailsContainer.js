@@ -23,79 +23,48 @@ const styles = (theme) => ({
   },
 })
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-]
+const TextFields = (props) => {
+  const { classes } = props
 
-class TextFields extends React.Component {
-  state = {}
+  return (
+    <form className={classes.container} noValidate autoComplete="off">
+      <TextField
+        id="standard-name"
+        label="Market"
+        className={classes.textField}
+        placeholder="Placeholder"
+        margin="normal"
+        disabled
+      />
 
-  handleChange = (name) => (event) => {
-    this.setState({ [name]: event.target.value })
-  }
+      <TextField
+        id="standard-name"
+        label="Last Name"
+        className={classes.textField}
+        placeholder="Placeholder"
+        margin="normal"
+        disabled
+      />
 
-  render() {
-    const { classes } = this.props
+      <TextField
+        id="standard-name"
+        label="Groups"
+        className={classes.textField}
+        placeholder="Placeholder"
+        margin="normal"
+        disabled
+      />
 
-    return (
-      <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="standard-name"
-          label="Created By"
-          className={classes.textField}
-          placeholder="Placeholder"
-          //value={this.state.name}
-          margin="normal"
-          disabled
-        />
-
-        <TextField
-          id="standard-name"
-          label="Created On"
-          className={classes.textField}
-          placeholder="Placeholder"
-          //value={this.state.name}
-          margin="normal"
-          disabled
-        />
-
-        <TextField
-          id="standard-name"
-          label="Responsible Groups"
-          className={classes.textField}
-          placeholder="Placeholder"
-          //value={this.state.name}
-          margin="normal"
-          disabled
-        />
-
-        <TextField
-          id="standard-name"
-          label="Template Name"
-          className={classes.textField}
-          placeholder="Placeholder"
-          //value={this.state.name}
-          margin="normal"
-          disabled
-        />
-      </form>
-    )
-  }
+      <TextField
+        id="standard-name"
+        label="Address"
+        className={classes.textField}
+        placeholder="Placeholder"
+        margin="normal"
+        disabled
+      />
+    </form>
+  )
 }
 
 TextFields.propTypes = {

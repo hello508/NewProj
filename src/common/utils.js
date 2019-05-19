@@ -6,10 +6,6 @@ export function getColumns() {
 
   const columns = [
     {
-      key: 'id',
-      name: 'ID',
-    },
-    {
       key: 'title',
       name: 'Title',
     },
