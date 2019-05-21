@@ -55,7 +55,7 @@ class NotificationTab extends Component {
         />
         <DataGrid
           columns={getColumns()}
-          rowKey="firstTabRows"
+          rowKey="thirdTabRows"
           selectedIndexes={this.state.selectedIndexes}
           onRowsSelected={this.onRowsSelected}
         />

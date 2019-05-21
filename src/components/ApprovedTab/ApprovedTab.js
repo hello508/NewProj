@@ -28,7 +28,7 @@ class ApprovedTab extends Component {
       <TabContainer>
         <DataGrid
           columns={getColumns()}
-          rowKey="firstTabRows"
+          rowKey="secondTabRows"
           selectedIndexes={this.state.selectedIndexes}
           onRowsSelected={this.onRowsSelected}
         />
