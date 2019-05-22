@@ -1,6 +1,7 @@
 import React from 'react'
 import { hot } from 'react-hot-loader'
 import { Provider } from 'react-redux'
+import { Switch, BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import HomeView from './views/home/home.view'
 import HeaderView from './views/header/header.view'
@@ -10,9 +11,12 @@ import store from './store'
 
 const App = () => (
   <Provider store={store}>
-    <HeaderView />
-    {/* <HomeView /> */}
-    <CardsView />
+    <Router>
+      <HeaderView />
+      {/* <HomeView /> */}
+      <Route exact path="/" component={CardsView} />
+      <Route path="/:tab" component={HomeView} />
+    </Router>
   </Provider>
 )
 

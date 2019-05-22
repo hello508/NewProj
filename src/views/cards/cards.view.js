@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab'
 import Badge from '@material-ui/core/Badge'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import { Link } from 'react-router-dom'
 
 import TabContainer from '~/components/TabContainer'
 
@@ -29,6 +30,7 @@ class CardsView extends Component {
       value,
     }))
     if (value === 0) {
+      window.location.reload(true)
       this.props.getFirstTabCardData()
     } else if (value === 1) {
       // tab 2
@@ -39,17 +41,23 @@ class CardsView extends Component {
     }
   }
 
-  _renderTab(tabData) {
+  _renderTab(tabData, tab) {
     const { classes } = this.props
     return (
       <div className={classes.tabContentContainer}>
         {tabData.map((data) => (
           <Card className={classes.cardContainer}>
             <CardContent className={classes.cardContentContainer}>
-              <div className={classes.groupName}>{data.groupName}</div>
+              <div className={classes.groupName}>
+                <Link to={`${tab}?group=${data.groupName}`}>{data.groupName}</Link>
+              </div>
               <div className={classes.countsContainer}>
-                <div className={classes.count}>{data.assignedToMe}</div>
-                <div className={classes.count}>{data.delegatedToMe}</div>
+                <div className={classes.count}>
+                  <Link to={`${tab}?assignedToMe=true`}>{data.assignedToMe}</Link>
+                </div>
+                <div className={classes.count}>
+                  <Link to={`${tab}?delegatedToMe=true`}>{data.delegatedToMe}</Link>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -84,9 +92,9 @@ class CardsView extends Component {
             />
             <Tab label="Tab Four" className={classes.tabItem} />
           </Tabs>
-          {value === 0 && this._renderTab(firstTabCardData)}
-          {value === 1 && this._renderTab(secondTabCardData)}
-          {value === 2 && this._renderTab(thirdTabCardData)}
+          {value === 0 && this._renderTab(firstTabCardData, 'tabOne')}
+          {value === 1 && this._renderTab(secondTabCardData, 'tabtwo')}
+          {value === 2 && this._renderTab(thirdTabCardData, 'tabThree')}
           {value === 3 && (
             <TabContainer>
               <Tabs value={value}>
