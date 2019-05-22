@@ -1,74 +1,74 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core'
-import PropTypes from 'prop-types'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import Badge from '@material-ui/core/Badge'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Badge from '@material-ui/core/Badge';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { Link } from 'react-router-dom';
 
-import TabContainer from '~/components/TabContainer'
+import TabContainer from '~/components/TabContainer';
 
-import { getFirstTabCardData, getSecondTabCardData, getThirdTabCardData } from './cards.actions'
-import { cardsSelector } from './cards.redux'
-import cardStyle from './cards.style'
+import { getFirstTabCardData, getSecondTabCardData, getThirdTabCardData } from './cards.actions';
+import { cardsSelector } from './cards.redux';
+import cardStyle from './cards.style';
 
 class CardsView extends Component {
   state = {
     value: 0,
-  }
+  };
 
   componentDidMount() {
-    this.props.getFirstTabCardData()
+    this.props.getFirstTabCardData();
   }
 
   onTabChange = (event, value) => {
     this.setState((prevState) => ({
       ...prevState,
       value,
-    }))
+    }));
     if (value === 0) {
-      window.location.reload(true)
-      this.props.getFirstTabCardData()
+      window.location.reload(true);
+      this.props.getFirstTabCardData();
     } else if (value === 1) {
       // tab 2
-      this.props.getSecondTabCardData()
+      this.props.getSecondTabCardData();
     } else if (value === 2) {
       // tab 3
-      this.props.getThirdTabCardData()
+      this.props.getThirdTabCardData();
     }
-  }
+  };
 
   _renderTab(tabData, tab) {
-    const { classes } = this.props
+    const { classes } = this.props;
     return (
       <div className={classes.tabContentContainer}>
         {tabData.map((data) => (
           <Card className={classes.cardContainer}>
             <CardContent className={classes.cardContentContainer}>
               <div className={classes.groupName}>
-                <Link to={`${tab}?group=${data.groupName}`}>{data.groupName}</Link>
+                <Link to={`${tab}/${data.groupName}`}>{data.groupName}</Link>
               </div>
               <div className={classes.countsContainer}>
                 <div className={classes.count}>
-                  <Link to={`${tab}?assignedToMe=true`}>{data.assignedToMe}</Link>
+                  <Link to={`${tab}/${data.groupName}/assignedToMe`}>{data.assignedToMe}</Link>
                 </div>
                 <div className={classes.count}>
-                  <Link to={`${tab}?delegatedToMe=true`}>{data.delegatedToMe}</Link>
+                  <Link to={`${tab}/${data.groupName}/delegatedToMe`}>{data.delegatedToMe}</Link>
                 </div>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
-    )
+    );
   }
 
   render() {
-    const { classes, firstTabCardData, secondTabCardData, thirdTabCardData } = this.props
-    const { value } = this.state
+    const { classes, firstTabCardData, secondTabCardData, thirdTabCardData } = this.props;
+    const { value } = this.state;
     return (
       <div className={classes.tabsContainer}>
         <div className={classes.root}>
@@ -93,7 +93,7 @@ class CardsView extends Component {
             <Tab label="Tab Four" className={classes.tabItem} />
           </Tabs>
           {value === 0 && this._renderTab(firstTabCardData, 'tabOne')}
-          {value === 1 && this._renderTab(secondTabCardData, 'tabtwo')}
+          {value === 1 && this._renderTab(secondTabCardData, 'tabTwo')}
           {value === 2 && this._renderTab(thirdTabCardData, 'tabThree')}
           {value === 3 && (
             <TabContainer>
@@ -105,7 +105,7 @@ class CardsView extends Component {
           )}
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -116,4 +116,4 @@ export default connect(
     getSecondTabCardData,
     getThirdTabCardData,
   }
-)(withStyles(cardStyle)(CardsView))
+)(withStyles(cardStyle)(CardsView));

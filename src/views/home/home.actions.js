@@ -2,9 +2,9 @@ import { LOAD_FIRST_TAB_DATA, LOAD_SECOND_TAB_DATA, LOAD_THIRD_TAB_DATA, APPROVE
 
 import * as homeServices from './home.service';
 
-export function getFirstTabData() {
+export function getFirstTabData(params) {
   return (dispatch) => {
-    homeServices.getFirstTabData().then((rows) => {
+    homeServices.getFirstTabData(params).then((rows) => {
       dispatch({
         type: LOAD_FIRST_TAB_DATA,
         rows,
@@ -13,9 +13,9 @@ export function getFirstTabData() {
   };
 }
 
-export function getSecondTabData() {
+export function getSecondTabData(params) {
   return (dispatch) => {
-    homeServices.getSecondTabData().then((rows) => {
+    homeServices.getSecondTabData(params).then((rows) => {
       dispatch({
         type: LOAD_SECOND_TAB_DATA,
         rows,
@@ -24,9 +24,9 @@ export function getSecondTabData() {
   };
 }
 
-export function getThirdTabData() {
+export function getThirdTabData(params) {
   return (dispatch) => {
-    homeServices.getThirdTabData().then((rows) => {
+    homeServices.getThirdTabData(params).then((rows) => {
       dispatch({
         type: LOAD_THIRD_TAB_DATA,
         rows,

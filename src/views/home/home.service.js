@@ -20,19 +20,34 @@ function createFakeRow(index) {
   };
 }
 
+function constructURL(params) {
+  return Object.keys(params)
+    .map((key) => key + '=' + params[key])
+    .join('&');
+}
+
 export default function createRowData(count) {
   return [...Array(count).keys()].map((i) => createFakeRow(i));
 }
 
-export function getFirstTabData() {
+export function getFirstTabData(params) {
+  console.log(constructURL(params));
+  /*
+  https://www.amazon.com?tab=tabOne&groupName=Cambridgeshire&filter=assignedToMe
+  fetch(`${BASE_URL}?${constructURL(params)}).then((response) => response.json()).then((json) => {
+    return json;
+  })
+  */
   return Promise.resolve(createRowData(1000));
 }
 
-export function getSecondTabData() {
+export function getSecondTabData(params) {
+  console.log(constructURL(params));
   return Promise.resolve(createRowData(500));
 }
 
-export function getThirdTabData() {
+export function getThirdTabData(params) {
+  console.log(constructURL(params));
   return Promise.resolve(createRowData(300));
 }
 
