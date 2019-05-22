@@ -22,6 +22,8 @@ import ApprovedTab from '~/components/ApprovedTab';
 import NotificationTab from '~/components/NotificationTab';
 import TabContainer from '~/components/TabContainer';
 
+import { TAB_ONE, TAB_TWO, TAB_THREE } from '~/views/cards/cards.constants';
+
 import { getFirstTabData, getSecondTabData, getThirdTabData, approveRows } from './home.actions';
 
 import homeStyle from './home.style';
@@ -31,22 +33,24 @@ class HomeView extends Component {
     this._refreshData();
   }
 
-  componentDidUpdate() {
-    this._refreshData();
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.tab !== this.props.match.params.tab) {
+      this._refreshData();
+    }
   }
 
   _refreshData() {
     const { match } = this.props;
     switch (match.params.tab) {
-      case 'tabOne': {
+      case TAB_ONE: {
         this.props.getFirstTabData(match.params);
         break;
       }
-      case 'tabTwo': {
+      case TAB_TWO: {
         this.props.getSecondTabData(match.params);
         break;
       }
-      case 'tabThree': {
+      case TAB_THREE: {
         this.props.getThirdTabData(match.params);
         break;
       }
@@ -61,13 +65,13 @@ class HomeView extends Component {
     return (
       <div className={classes.tabsContainer}>
         <div className={classes.root}>
-          {match.params.tab === 'tabOne' && <PendingApprovalTab approveRows={this.props.approveRows} />}
-          {match.params.tab === 'tabTwo' && (
+          {match.params.tab === TAB_ONE && <PendingApprovalTab approveRows={this.props.approveRows} />}
+          {match.params.tab === TAB_TWO && (
             <div className={classes.approvedTabContainer}>
               <ApprovedTab />
             </div>
           )}
-          {match.params.tab === 'tabThree' && <NotificationTab />}
+          {match.params.tab === TAB_THREE && <NotificationTab />}
           {false && <div />}
         </div>
       </div>
