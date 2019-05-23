@@ -44,4 +44,7 @@ export default {
     display: 'flex',
     justifyContent: 'center',
   },
+  delegatedcount: {
+    display: 'none',
+  },
 }
