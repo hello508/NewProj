@@ -41,7 +41,7 @@ class HomeView extends Component {
 
   _refreshData() {
     const { match } = this.props;
-    switch (match.params.tab) {
+    switch (match.params.type) {
       case TAB_ONE: {
         this.props.getFirstTabData(match.params);
         break;
@@ -65,7 +65,9 @@ class HomeView extends Component {
     return (
       <div className={classes.tabsContainer}>
         <div className={classes.root}>
-          {match.params.tab === TAB_ONE && <PendingApprovalTab approveRows={this.props.approveRows} />}
+          {match.params.tab === TAB_ONE && (
+            <PendingApprovalTab approveRows={this.props.approveRows} />
+          )}
           {match.params.tab === TAB_TWO && (
             <div className={classes.approvedTabContainer}>
               <ApprovedTab />
@@ -86,5 +88,5 @@ export default connect(
     getSecondTabData,
     getThirdTabData,
     approveRows,
-  }
+  },
 )(withStyles(homeStyle)(withRouter(HomeView)));
