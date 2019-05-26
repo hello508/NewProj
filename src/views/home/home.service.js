@@ -1,4 +1,5 @@
 import faker from 'faker';
+import { createPostRequest } from '~/common/http';
 
 function createFakeRow(index) {
   return {
@@ -22,21 +23,23 @@ function createFakeRow(index) {
 
 function constructURL(params) {
   return Object.keys(params)
-    .map((key) => key + '=' + params[key])
+    .map(key => key + '=' + params[key])
     .join('&');
 }
 
 export default function createRowData(count) {
-  return [...Array(count).keys()].map((i) => createFakeRow(i));
+  return [...Array(count).keys()].map(i => createFakeRow(i));
 }
 
 export function getFirstTabData(params) {
   console.log(constructURL(params));
+  return createPostRequest(params);
   /*
   https://www.amazon.com?tab=tabOne&groupName=Cambridgeshire&filter=assignedToMe
   fetch(`${BASE_URL}?${constructURL(params)}).then((response) => response.json()).then((json) => {
     return json;
   })
+  
   */
   return Promise.resolve(createRowData(1000));
 }
