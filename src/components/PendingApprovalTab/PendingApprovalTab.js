@@ -1,49 +1,49 @@
-import React, { Component } from 'react';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
+import React, { Component } from 'react'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import Typography from '@material-ui/core/Typography'
+import Badge from '@material-ui/core/Badge'
 
-import DataGrid from '../Grids';
-import AlertDialog from '../AlertDialog';
-import SimpleAppBar from '../AppBar';
-import TextareaPage from '../TextArea';
-import TabContainer from '../TabContainer';
-import TextFields from '../DetailsContainer';
-import Button from '../Button';
+import DataGrid from '../Grids'
+import AlertDialog from '../AlertDialog'
+import SimpleAppBar from '../AppBar'
+import TextareaPage from '../TextArea'
+import TabContainer from '../TabContainer'
+import TextFields from '../DetailsContainer'
+import Button from '../Button'
 
-import { getColumns } from '../../common/utils';
+import { getColumns } from '../../common/utils'
 
 class PendingApprovalTab extends Component {
-  state = { open: false, selectedRows: [], selectedIndexes: [] };
+  state = { open: false, selectedRows: [], selectedIndexes: [] }
 
   onToggle = () => {
     this.setState((prevState) => ({
       ...prevState,
       open: !prevState.open,
-    }));
-  };
+    }))
+  }
 
   onApprove = () => {
     // Make API Call
-    this.props.approveRows(this.state.selectedRows);
+    this.props.approveRows(this.state.selectedRows)
     this.setState((prevState) => ({
       open: !prevState.open,
       selectedRows: [],
       selectedIndexes: [],
-    }));
-  };
+    }))
+  }
 
   onRowsSelected = (rows, selectedIndexes) => {
     this.setState((prevState) => ({
       ...prevState,
       selectedRows: rows,
       selectedIndexes,
-    }));
-  };
+    }))
+  }
 
   render() {
-    const {} = this.props;
+    const {} = this.props
     return (
       <TabContainer>
         <Button variant="contained" color="primary" onClick={this.onToggle}>
@@ -66,11 +66,11 @@ class PendingApprovalTab extends Component {
           onRowsSelected={this.onRowsSelected}
         />
         <SimpleAppBar />
-        <TextFields />
+        <TextFields selectedRows={this.state.selectedRows} />
         <TextareaPage />
       </TabContainer>
-    );
+    )
   }
 }
 
-export default PendingApprovalTab;
+export default PendingApprovalTab

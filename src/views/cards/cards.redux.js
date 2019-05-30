@@ -4,14 +4,18 @@ const initialState = {
   firstTabCardData: [],
   secondTabCardData: [],
   thirdTabCardData: [],
+  notificationBadgeCount: 0,
+  pendingApprovalBadgeCount: 0,
 }
 
 export const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_FIRST_TAB_CARD_DATA: {
+      const { data } = action
       return {
         ...state,
-        firstTabCardData: action.data,
+        firstTabCardData: data.slice(0, data.length - 1),
+        pendingApprovalBadgeCount: data[data.length - 1].totalNotification,
       }
     }
     case LOAD_SECOND_TAB_CARD_DATA: {
@@ -21,9 +25,11 @@ export const cardReducer = (state = initialState, action) => {
       }
     }
     case LOAD_THIRD_TAB_CARD_DATA: {
+      const { data } = action
       return {
         ...state,
-        thirdTabCardData: action.data,
+        thirdTabCardData: data.slice(0, data.length - 1),
+        notificationBadgeCount: data[data.length - 1].totalNotification,
       }
     }
     default: {
@@ -37,5 +43,7 @@ export const cardsSelector = (state) => {
     firstTabCardData: state.cards.firstTabCardData,
     secondTabCardData: state.cards.secondTabCardData,
     thirdTabCardData: state.cards.thirdTabCardData,
+    notificationBadgeCount: state.cards.notificationBadgeCount,
+    pendingApprovalBadgeCount: state.cards.pendingApprovalBadgeCount,
   }
 }

@@ -2,7 +2,7 @@ export function getColumns() {
   const defaultColumnProperties = {
     resizable: true,
     width: 250,
-  };
+  }
 
   const columns = [
     {
@@ -45,10 +45,6 @@ export function getColumns() {
       key: 'jobArea',
       name: 'Job Area',
     },
-    {
-      key: 'jobType',
-      name: 'Job Type',
-    },
-  ].map((c) => ({ ...c, ...defaultColumnProperties }));
-  return columns;
+  ].map((c) => ({ ...c, ...defaultColumnProperties }))
+  return columns
 }

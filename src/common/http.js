@@ -1,19 +1,23 @@
-export function createPostRequest(requestBody = {}) {
+export async function createPostRequest(requestBody = {}) {
   const nbk = localStorage.getItem('nbk');
+  const data = JSON.stringify({
+    userName: nbk,
+    ...requestBody
+  })
+  const env ='dev'
   if (nbk !== undefined && nbk !== null) {
-    const settings = {
-      body: JSON.stringify({
-        nbk,
-        ...requestBody,
-      }),
-      cache: 'no-cache',
+    const fetchURL = await fetch(`http://boa.co:3000/${env}.ficc.ui.middletier/`, {
       credentials: 'include',
+    )}
+    const response = await fetch(`${fetchURL.url}${env}.ficc.fictools.ui/getCards`, {
+      method: 'POST',
       headers: {
-        Accept: 'application/json',
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      method: 'POST',
-    };
-    return fetch('url', settings).then(response => response.json());
+      credentials: 'include',
+      body: data
+    })
+    return response.json());
   }
 }

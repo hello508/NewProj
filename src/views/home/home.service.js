@@ -1,5 +1,5 @@
-import faker from 'faker';
-import { createPostRequest } from '~/common/http';
+import faker from 'faker'
+//import { createPostRequest } from '~/common/http'
 
 function createFakeRow(index) {
   return {
@@ -18,43 +18,37 @@ function createFakeRow(index) {
     companyName: faker.company.companyName(),
     jobArea: faker.name.jobArea(),
     jobType: faker.name.jobType(),
-  };
+  }
 }
 
 function constructURL(params) {
   return Object.keys(params)
-    .map(key => key + '=' + params[key])
-    .join('&');
+    .map((key) => key + '=' + params[key])
+    .join('&')
 }
 
 export default function createRowData(count) {
-  return [...Array(count).keys()].map(i => createFakeRow(i));
+  return [...Array(count).keys()].map((i) => createFakeRow(i))
 }
 
 export function getFirstTabData(params) {
-  console.log(constructURL(params));
-  return createPostRequest(params);
   /*
-  https://www.amazon.com?tab=tabOne&groupName=Cambridgeshire&filter=assignedToMe
-  fetch(`${BASE_URL}?${constructURL(params)}).then((response) => response.json()).then((json) => {
-    return json;
-  })
+  return createPostRequest(params);
   
   */
-  return Promise.resolve(createRowData(1000));
+  return Promise.resolve(createRowData(1000))
 }
 
 export function getSecondTabData(params) {
-  console.log(constructURL(params));
-  return Promise.resolve(createRowData(500));
+  return Promise.resolve(createRowData(500))
 }
 
 export function getThirdTabData(params) {
-  console.log(constructURL(params));
-  return Promise.resolve(createRowData(300));
+  console.log(constructURL(params))
+  return Promise.resolve(createRowData(300))
 }
 
 export function approveRows() {
   // fetch(URL_CONFIG)
-  return Promise.resolve({ success: true });
+  return Promise.resolve({ success: true })
 }
