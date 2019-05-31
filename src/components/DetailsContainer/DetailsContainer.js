@@ -24,26 +24,21 @@ const styles = (theme) => ({
 })
 
 const TextFields = (props) => {
-  const { classes, selectedRows } = props
-
+  const { classes, selectedRow } = props
   return (
     <form className={classes.container} noValidate autoComplete="off">
       <TextField
-        id="standard-name"
         label="Company Name"
         className={classes.textField}
-        value={selectedRows.companyName}
-        placeholder="Placeholder"
+        value={selectedRow && selectedRow['companyName']}
         margin="normal"
         disabled
       />
 
       <TextField
-        id="standard-name"
         label="Job Type"
         className={classes.textField}
-        placeholder="Placeholder"
-        value={selectedRows.jobType}
+        value={selectedRow && selectedRow['jobType']}
         margin="normal"
         disabled
       />

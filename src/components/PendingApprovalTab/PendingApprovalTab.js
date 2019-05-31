@@ -15,7 +15,7 @@ import Button from '../Button'
 import { getColumns } from '../../common/utils'
 
 class PendingApprovalTab extends Component {
-  state = { open: false, selectedRows: [], selectedIndexes: [] }
+  state = { open: false, selectedRows: [], selectedIndexes: [], selectedRow: {} }
 
   onToggle = () => {
     this.setState((prevState) => ({
@@ -42,6 +42,12 @@ class PendingApprovalTab extends Component {
     }))
   }
 
+  onRowClicked = (row) => {
+    this.setState({
+      selectedRow: row,
+    })
+  }
+
   render() {
     const {} = this.props
     return (
@@ -64,9 +70,10 @@ class PendingApprovalTab extends Component {
           rowKey="firstTabRows"
           selectedIndexes={this.state.selectedIndexes}
           onRowsSelected={this.onRowsSelected}
+          onRowClicked={this.onRowClicked}
         />
         <SimpleAppBar />
-        <TextFields selectedRows={this.state.selectedRows} />
+        <TextFields selectedRow={this.state.selectedRow} />
         <TextareaPage />
       </TabContainer>
     )
