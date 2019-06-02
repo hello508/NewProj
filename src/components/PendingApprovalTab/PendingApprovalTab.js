@@ -52,10 +52,15 @@ class PendingApprovalTab extends Component {
     const {} = this.props
     return (
       <TabContainer>
-        <Button variant="contained" color="primary" onClick={this.onToggle}>
+        <Button variant="contained" color="primary" onClick={this.onToggle} disabled={!this.state.selectedRows}>
           Approve
         </Button>
-        <Button variant="contained" color="secondary" onClick={this.handleClickOpen}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={this.handleClickOpen}
+          disabled={!this.state.selectedRows}
+        >
           Reject
         </Button>
         <AlertDialog

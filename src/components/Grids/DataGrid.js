@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import ReactDataGrid from 'react-data-grid'
 
 class DataGrid extends Component {
-  state = { selectedIndexes: [], selectedRow: {} }
+  state = { selectedIndexes: [] }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.selectedIndexes !== nextProps.selectedIndexes) {

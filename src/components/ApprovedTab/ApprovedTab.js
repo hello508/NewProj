@@ -12,7 +12,7 @@ import TextFields from '../DetailsContainer'
 import { getColumns } from '../../common/utils'
 
 class ApprovedTab extends Component {
-  state = { selectedRows: [], selectedIndexes: [] }
+  state = { selectedRows: [], selectedIndexes: [], selectedRow: {} }
 
   onRowsSelected = (rows, selectedIndexes) => {
     this.setState((prevState) => ({
@@ -20,6 +20,12 @@ class ApprovedTab extends Component {
       selectedRows: rows,
       selectedIndexes,
     }))
+  }
+
+  onRowClicked = (row) => {
+    this.setState({
+      selectedRow: row,
+    })
   }
 
   render() {
@@ -31,9 +37,10 @@ class ApprovedTab extends Component {
           rowKey="secondTabRows"
           selectedIndexes={this.state.selectedIndexes}
           onRowsSelected={this.onRowsSelected}
+          onRowClicked={this.onRowClicked}
         />
         <SimpleAppBar />
-        <TextFields />
+        <TextFields selectedRow={this.state.selectedRow} />
         <TextareaPage />
       </TabContainer>
     )

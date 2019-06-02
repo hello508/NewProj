@@ -15,22 +15,16 @@ const styles = (theme) => ({
     marginRight: theme.spacing.unit,
     width: 200,
   },
-  dense: {
-    marginTop: 19,
-  },
-  menu: {
-    width: 200,
-  },
 })
 
 const TextFields = (props) => {
   const { classes, selectedRow } = props
   return (
-    <form className={classes.container} noValidate autoComplete="off">
+    <form className={classes.container}>
       <TextField
         label="Company Name"
         className={classes.textField}
-        value={selectedRow && selectedRow['companyName']}
+        value={selectedRow['companyName'] || ''}
         margin="normal"
         disabled
       />
@@ -38,7 +32,7 @@ const TextFields = (props) => {
       <TextField
         label="Job Type"
         className={classes.textField}
-        value={selectedRow && selectedRow['jobType']}
+        value={selectedRow['jobType'] || ''}
         margin="normal"
         disabled
       />

@@ -15,7 +15,7 @@ import Button from '../Button'
 import { getColumns } from '../../common/utils'
 
 class NotificationTab extends Component {
-  state = { open: false, selectedRows: [], selectedIndexes: [] }
+  state = { open: false, selectedRows: [], selectedIndexes: [], selectedRow: {} }
 
   onToggle = () => {
     this.setState((prevState) => ({
@@ -39,6 +39,12 @@ class NotificationTab extends Component {
     }))
   }
 
+  onRowClicked = (row) => {
+    this.setState({
+      selectedRow: row,
+    })
+  }
+
   render() {
     const {} = this.props
     return (
@@ -58,9 +64,10 @@ class NotificationTab extends Component {
           rowKey="thirdTabRows"
           selectedIndexes={this.state.selectedIndexes}
           onRowsSelected={this.onRowsSelected}
+          onRowClicked={this.onRowClicked}
         />
         <SimpleAppBar />
-        <TextFields />
+        <TextFields selectedRow={this.state.selectedRow} />
         <TextareaPage />
       </TabContainer>
     )
