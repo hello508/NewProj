@@ -60,12 +60,17 @@ class HomeView extends Component {
     }
   }
 
+  onApprove = (selectedRows) => {
+    const { match } = this.props
+    this.props.approveRows(selectedRows, match.params.tab, match.params.groupName)
+  }
+
   render() {
     const { classes, match } = this.props
     return (
       <div className={classes.tabsContainer}>
         <div className={classes.root}>
-          {match.params.tab === TAB_ONE && <PendingApprovalTab approveRows={this.props.approveRows} />}
+          {match.params.tab === TAB_ONE && <PendingApprovalTab approveRows={this.onApprove} />}
           {match.params.tab === TAB_TWO && (
             <div className={classes.approvedTabContainer}>
               <ApprovedTab />

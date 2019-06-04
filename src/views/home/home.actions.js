@@ -1,6 +1,6 @@
-import { LOAD_FIRST_TAB_DATA, LOAD_SECOND_TAB_DATA, LOAD_THIRD_TAB_DATA, APPROVE_ROWS } from './home.constants';
+import { LOAD_FIRST_TAB_DATA, LOAD_SECOND_TAB_DATA, LOAD_THIRD_TAB_DATA, APPROVE_ROWS } from './home.constants'
 
-import * as homeServices from './home.service';
+import * as homeServices from './home.service'
 
 export function getFirstTabData(params) {
   return (dispatch) => {
@@ -8,9 +8,9 @@ export function getFirstTabData(params) {
       dispatch({
         type: LOAD_FIRST_TAB_DATA,
         rows,
-      });
-    });
-  };
+      })
+    })
+  }
 }
 
 export function getSecondTabData(params) {
@@ -19,9 +19,9 @@ export function getSecondTabData(params) {
       dispatch({
         type: LOAD_SECOND_TAB_DATA,
         rows,
-      });
-    });
-  };
+      })
+    })
+  }
 }
 
 export function getThirdTabData(params) {
@@ -30,12 +30,12 @@ export function getThirdTabData(params) {
       dispatch({
         type: LOAD_THIRD_TAB_DATA,
         rows,
-      });
-    });
-  };
+      })
+    })
+  }
 }
 
-export function approveRows(selectedRows) {
+export function approveRows(selectedRows, tab, groupName) {
   return (dispatch) => {
     homeServices
       .approveRows(selectedRows)
@@ -43,10 +43,11 @@ export function approveRows(selectedRows) {
         dispatch({
           type: APPROVE_ROWS,
           selectedRows,
-        });
+        })
+        dispatch(getFirstTabData(tab, groupName))
       })
       .catch((err) => {
         // show snackbar
-      });
-  };
+      })
+  }
 }

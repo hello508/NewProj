@@ -15,12 +15,19 @@ import Button from '../Button'
 import { getColumns } from '../../common/utils'
 
 class PendingApprovalTab extends Component {
-  state = { open: false, selectedRows: [], selectedIndexes: [], selectedRow: {} }
+  state = { open: false, rejectOpen: false, selectedRows: [], selectedIndexes: [], selectedRow: {} }
 
   onToggle = () => {
     this.setState((prevState) => ({
       ...prevState,
       open: !prevState.open,
+    }))
+  }
+
+  onRejectToggle = () => {
+    this.setState((prevState) => ({
+      ...prevState,
+      rejectOpen: !prevState.rejectOpen,
     }))
   }
 
@@ -52,15 +59,10 @@ class PendingApprovalTab extends Component {
     const {} = this.props
     return (
       <TabContainer>
-        <Button variant="contained" color="primary" onClick={this.onToggle} disabled={!this.state.selectedRows}>
+        <Button variant="contained" color="primary" onClick={this.onToggle}>
           Approve
         </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={this.handleClickOpen}
-          disabled={!this.state.selectedRows}
-        >
+        <Button variant="contained" color="secondary" onClick={this.onRejectToggle}>
           Reject
         </Button>
         <AlertDialog
@@ -69,6 +71,12 @@ class PendingApprovalTab extends Component {
           message="Approve the request"
           onReject={this.onToggle}
           onApprove={this.onApprove}
+        />
+        <AlertDialog
+          open={this.state.rejectOpen}
+          onClose={this.onRejectToggle}
+          message="Reject the request"
+          onReject={this.onRejectToggle}
         />
         <DataGrid
           columns={getColumns()}

@@ -33,7 +33,7 @@ export default function createRowData(count) {
 
 export function getFirstTabData(params) {
   /*
-  return createPostRequest(params);
+  return createPostRequest(params, 'getCards');
   
   */
   return Promise.resolve(createRowData(1000))
@@ -48,7 +48,8 @@ export function getThirdTabData(params) {
   return Promise.resolve(createRowData(300))
 }
 
-export function approveRows() {
+export function approveRows(rows) {
+  //return createPostRequest(rows.map(i => i.NotificationId), 'approveReject');
   // fetch(URL_CONFIG)
   return Promise.resolve({ success: true })
 }
