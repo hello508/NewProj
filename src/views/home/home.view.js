@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import Badge from '@material-ui/core/Badge'
 import Button from '@material-ui/core/Button'
 import { withRouter } from 'react-router-dom'
+import { ToastContainer } from 'react-toastr'
 
 import { getColumns } from '~/common/utils'
 
@@ -21,6 +22,7 @@ import PendingApprovalTab from '~/components/PendingApprovalTab'
 import ApprovedTab from '~/components/ApprovedTab'
 import NotificationTab from '~/components/NotificationTab'
 import TabContainer from '~/components/TabContainer'
+import Snackbar from '@material-ui/core/Snackbar'
 
 import { TAB_ONE, TAB_TWO, TAB_THREE } from '~/views/cards/cards.constants'
 
@@ -29,6 +31,7 @@ import { getFirstTabData, getSecondTabData, getThirdTabData, approveRows } from 
 import homeStyle from './home.style'
 
 class HomeView extends Component {
+  container = null
   componentDidMount() {
     this._refreshData()
   }
@@ -36,6 +39,14 @@ class HomeView extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.tab !== this.props.match.params.tab) {
       this._refreshData()
+    }
+    if (prevProps.approvedRows !== this.props.approvedRows) {
+      this.props.approvedRows.forEach((approvedRow) => {
+        this.container[approvedRow.status](approvedRow.message, approvedRow.status, {
+          closeButton: true,
+          timeOut: 1000,
+        })
+      })
     }
   }
 
@@ -66,9 +77,10 @@ class HomeView extends Component {
   }
 
   render() {
-    const { classes, match } = this.props
+    const { classes, match, approvedRows } = this.props
     return (
       <div className={classes.tabsContainer}>
+        <ToastContainer ref={(ref) => (this.container = ref)} className="toast-top-right" />
         <div className={classes.root}>
           {match.params.tab === TAB_ONE && <PendingApprovalTab approveRows={this.onApprove} />}
           {match.params.tab === TAB_TWO && (
@@ -85,7 +97,7 @@ class HomeView extends Component {
 }
 
 export default connect(
-  () => ({}),
+  (state) => ({ approvedRows: state.home.approvedRows }),
   {
     getFirstTabData,
     getSecondTabData,

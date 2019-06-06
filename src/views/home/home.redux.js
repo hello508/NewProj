@@ -1,9 +1,10 @@
-import { LOAD_FIRST_TAB_DATA, LOAD_SECOND_TAB_DATA, LOAD_THIRD_TAB_DATA } from './home.constants'
+import { LOAD_FIRST_TAB_DATA, LOAD_SECOND_TAB_DATA, LOAD_THIRD_TAB_DATA, APPROVE_ROWS } from './home.constants'
 
 const initialState = {
   firstTabRows: [],
   secondTabRows: [],
   thirdTabRows: [],
+  approvedRows: [],
 }
 
 export const homeReducer = (state = initialState, action) => {
@@ -24,6 +25,12 @@ export const homeReducer = (state = initialState, action) => {
       return {
         ...state,
         thirdTabRows: action.rows,
+      }
+    }
+    case APPROVE_ROWS: {
+      return {
+        ...state,
+        approvedRows: action.approvedRows,
       }
     }
     default: {

@@ -39,12 +39,12 @@ export function approveRows(selectedRows, tab, groupName) {
   return (dispatch) => {
     homeServices
       .approveRows(selectedRows)
-      .then((response) => {
+      .then((approvedRows) => {
         dispatch({
           type: APPROVE_ROWS,
-          selectedRows,
+          approvedRows,
         })
-        dispatch(getFirstTabData(tab, groupName))
+        dispatch(getFirstTabData({ tab, groupName }))
       })
       .catch((err) => {
         // show snackbar

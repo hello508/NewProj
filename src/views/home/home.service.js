@@ -49,7 +49,10 @@ export function getThirdTabData(params) {
 }
 
 export function approveRows(rows) {
-  //return createPostRequest(rows.map(i => i.NotificationId), 'approveReject');
+  //return createPostRequest({rows.map(i => i.NotificationID)}, 'approveReject');
   // fetch(URL_CONFIG)
-  return Promise.resolve({ success: true })
+  return Promise.resolve([
+    { status: 'success', message: 'approved sucessfully' },
+    { status: 'success', message: 'approved sucessfully' },
+  ])
 }
