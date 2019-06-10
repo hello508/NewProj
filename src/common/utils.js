@@ -2,6 +2,8 @@ export function getColumns() {
   const defaultColumnProperties = {
     resizable: true,
     width: 250,
+    filterable: true,
+    sortable: true,
   }
 
   const columns = [

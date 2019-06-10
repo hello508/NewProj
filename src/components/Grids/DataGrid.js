@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ReactDataGrid from 'react-data-grid'
+import ReactDataGrid, { Row } from 'react-data-grid'
+import { Toolbar, Data } from 'react-data-grid-addons'
+import { withStyles } from '@material-ui/core'
+
+const selectors = Data.Selectors
 
 class DataGrid extends Component {
-  state = { selectedIndexes: [] }
+  state = { selectedIndexes: [], rowIndex: -1, filters: {}, sortColumn: {}, sortDirection: 'ASC' }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.selectedIndexes !== nextProps.selectedIndexes) {
@@ -15,7 +19,7 @@ class DataGrid extends Component {
   }
 
   _rowGetter = (id) => {
-    return this.props.rows[id]
+    return this.getRows()[id]
   }
 
   onRowsSelected = (rows) => {
@@ -46,7 +50,43 @@ class DataGrid extends Component {
   }
 
   onRowClick = (rowIdx) => {
-    this.props.onRowClicked(this.props.rows[rowIdx])
+    if (rowIdx >= 0) {
+      this.setState({
+        rowIndex: rowIdx,
+      })
+      this.props.onRowClicked(this.getRows()[rowIdx])
+    }
+  }
+
+  rowRenderer = (row) => {
+    const { rowIndex } = this.state
+    return <Row {...row} extraClasses={rowIndex == row.idx ? 'selected' : ''} />
+  }
+
+  handleFilterChange = (filter) => {
+    const newFilters = Object.assign({}, this.state.filters)
+    if (filter.filterTerm) {
+      newFilters[filter.column.key] = filter
+    } else {
+      delete newFilters[filter.column.key]
+    }
+    this.setState({
+      filters: newFilters,
+    })
+  }
+
+  onClearFilter = () => {
+    this.setState({
+      filters: {},
+    })
+  }
+
+  getRows = () => {
+    return selectors.getRows({ rows: this.props.rows, filters: this.state.filters })
+  }
+
+  handleGridSort = (sortColumn, sortDirection) => {
+    this.setState({ sortColumn: sortColumn, sortDirection: sortDirection })
   }
 
   render() {
@@ -55,10 +95,15 @@ class DataGrid extends Component {
       <ReactDataGrid
         columns={columns}
         rowGetter={this._rowGetter}
-        rowsCount={this.props.rows.length}
+        rowsCount={this.getRows().length}
         minHeight={330}
         key={rowKey}
         onRowClick={this.onRowClick}
+        rowRenderer={this.rowRenderer}
+        toolbar={<Toolbar enableFilter={true} />}
+        onAddFilter={this.handleFilterChange}
+        onClearFilters={this.onClearFilter}
+        onGridSort={this.handleGridSort}
         rowSelection={{
           enableShiftSelect: false,
           showCheckbox: true,
