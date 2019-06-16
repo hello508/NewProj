@@ -10,6 +10,7 @@ import CardContent from '@material-ui/core/CardContent'
 import { Link, withRouter } from 'react-router-dom'
 
 import TabContainer from '~/components/TabContainer'
+import TemplateTab from '~/components/TemplateTab'
 
 import { getFirstTabCardData, getSecondTabCardData, getThirdTabCardData } from './cards.actions'
 import { cardsSelector } from './cards.redux'
@@ -46,6 +47,9 @@ class CardsView extends Component {
         this.props.getThirdTabCardData()
         break
       }
+      case 'tabFour': {
+        break
+      }
       default: {
         break
       }
@@ -61,6 +65,9 @@ class CardsView extends Component {
     } else if (value === 2) {
       // tab 3
       this.props.history.push('/tabThree')
+    } else if (value === 3) {
+      // tab 3
+      this.props.history.push('/tabFour')
     }
   }
 
@@ -80,8 +87,11 @@ class CardsView extends Component {
       case TAB_THREE: {
         return 2
       }
-      default: {
+      case TAB_FOUR: {
         return 3
+      }
+      default: {
+        return 4
       }
     }
   }
@@ -155,11 +165,7 @@ class CardsView extends Component {
           {tab === TAB_ONE && this._renderTab(firstTabCardData, TAB_ONE)}
           {tab === TAB_TWO && this._renderTab(secondTabCardData, TAB_TWO)}
           {tab === TAB_THREE && this._renderTab(thirdTabCardData, TAB_THREE)}
-          {tab === TAB_FOUR && (
-            <TabContainer>
-              <div />
-            </TabContainer>
-          )}
+          {tab === TAB_FOUR && <TemplateTab />}
         </div>
       </div>
     )

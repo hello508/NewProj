@@ -3,9 +3,9 @@ import React from 'react'
 const TextareaPage = () => {
   return (
     <div className="form-group">
-      <label htmlFor="exampleFormControlTextarea1">Body</label>
+      <label>Body</label>
       <div>
-        <textarea className="form-control" id="exampleFormControlTextarea1" rows="15" />
+        <textarea className="form-control" rows="15" />
       </div>
     </div>
   )

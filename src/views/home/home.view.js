@@ -21,10 +21,10 @@ import TextareaPage from '~/components/TextArea'
 import PendingApprovalTab from '~/components/PendingApprovalTab'
 import ApprovedTab from '~/components/ApprovedTab'
 import NotificationTab from '~/components/NotificationTab'
+import TemplateTab from '~/components/TemplateTab'
 import TabContainer from '~/components/TabContainer'
-import Snackbar from '@material-ui/core/Snackbar'
 
-import { TAB_ONE, TAB_TWO, TAB_THREE } from '~/views/cards/cards.constants'
+import { TAB_ONE, TAB_TWO, TAB_THREE, TAB_FOUR } from '~/views/cards/cards.constants'
 
 import { getFirstTabData, getSecondTabData, getThirdTabData, approveRows } from './home.actions'
 
@@ -89,7 +89,7 @@ class HomeView extends Component {
             </div>
           )}
           {match.params.tab === TAB_THREE && <NotificationTab />}
-          {false && <div />}
+          {match.params.tab === TAB_FOUR && <TemplateTab />}
         </div>
       </div>
     )
