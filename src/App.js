@@ -13,7 +13,6 @@ const App = () => (
   <Provider store={store}>
     <Router>
       <HeaderView />
-      {/* <HomeView /> */}
       <Route exact path="/:tab" component={CardsView} />
       <Route path="/tabs/:tab/:groupName" component={HomeView} />
       <Route exact path="/" render={() => <Redirect to="/tabOne" />} />
