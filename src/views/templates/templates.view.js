@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
 import { withStyles } from '@material-ui/core'
 
 import { LOAD_PREVIEW_TEMPLATE_DATA, OPEN_MODAL } from '~/views/templates/templates.constants'
@@ -12,6 +10,7 @@ import TabContainer from '~/components/TabContainer'
 import InnerTemplate from '~/components/InnerTemplate'
 import Button from '~/components/Button'
 import OpenModal from '~/components/OpenModal'
+import NewModal from '~/components/NewModal'
 import templateStyles from './templates.style'
 
 class TemplateTab extends Component {
@@ -30,6 +29,13 @@ class TemplateTab extends Component {
   }
 
   onNewToggle = () => {
+    this.setState((prevState) => ({
+      ...prevState,
+      newOpen: !prevState.newOpen,
+    }))
+  }
+
+  onPreviewToggle = () => {
     this.setState((prevState) => ({
       ...prevState,
       newOpen: !prevState.newOpen,
@@ -58,6 +64,7 @@ class TemplateTab extends Component {
           onOpenToggle={this.onOpenToggle}
           selectedTemplateData={selectedTemplateData}
         />
+        <NewModal open={this.state.newOpen} onClose={this.onNewToggle} />
         <InnerTemplate />
       </TabContainer>
     )

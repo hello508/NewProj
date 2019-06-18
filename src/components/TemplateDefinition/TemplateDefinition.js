@@ -5,33 +5,14 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 
 import TabContainer from '../TabContainer'
-
-const styles = (theme) => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 500,
-  },
-  formControl: {
-    width: '99%',
-    height: '750px',
-    margin: '10px',
-  },
-  templateBody: {
-    margin: '10px',
-  },
-})
+import templateDefinitionStyles from './TemplateDefinition.style'
 
 class TemplateDefinition extends Component {
   render() {
     const { classes } = this.props
     return (
       <TabContainer>
-        <div>
+        <div className={classes.templateDefinitionContainer}>
           <form className={classes.container}>
             <TextField
               label="Template Name"
@@ -40,7 +21,6 @@ class TemplateDefinition extends Component {
               //value={selectedRow['companyName'] || ''}
               margin="normal"
             />
-
             <TextField
               label="Template Version"
               className={classes.textField}
@@ -62,4 +42,4 @@ TemplateDefinition.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(TemplateDefinition)
+export default withStyles(templateDefinitionStyles)(TemplateDefinition)

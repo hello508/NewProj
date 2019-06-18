@@ -22,7 +22,7 @@ class InnerTemplate extends Component {
     return (
       <div className={classes.tabsContainer}>
         <div className={classes.root}>
-          <Tabs variant="fullWidth" value={value} onChange={this.onTabChange}>
+          <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
             <Tab label="Template" className={classes.tabItem} />
             <Tab label="Default" className={classes.tabItem} />
             <Tab label="Preview" className={classes.tabItem} />
