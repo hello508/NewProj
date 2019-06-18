@@ -56,7 +56,6 @@ class PendingApprovalTab extends Component {
   }
 
   render() {
-    const {} = this.props
     return (
       <TabContainer>
         <Button variant="contained" color="primary" onClick={this.onToggle}>

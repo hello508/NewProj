@@ -17,7 +17,7 @@ class InnerTemplate extends Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, previewRowData } = this.props
     const { value } = this.state
     return (
       <div className={classes.tabsContainer}>
@@ -27,7 +27,7 @@ class InnerTemplate extends Component {
             <Tab label="Default" className={classes.tabItem} />
             <Tab label="Preview" className={classes.tabItem} />
           </Tabs>
-          {value === 0 && <TemplateDefinition />}
+          {value === 0 && <TemplateDefinition previewDefinitionData={previewRowData} />}
           {value === 1 && <DefaultValues />}
           {value === 2 && <PreviewValues />}
         </div>

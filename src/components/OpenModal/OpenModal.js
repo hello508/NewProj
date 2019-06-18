@@ -48,6 +48,11 @@ class OpenModal extends Component {
     })
   }
 
+  onpreviewTemplate = () => {
+    const { selectedTemplateName, selectedTemplateVersion } = this.state
+    this.props.previewTemplate(selectedTemplateName.value, selectedTemplateVersion.value)
+  }
+
   render() {
     const { selectedOption } = this.state
     const { open, onClose, classes, selectedTemplateData } = this.props
@@ -70,7 +75,7 @@ class OpenModal extends Component {
               options={this.state.templateVersion}
             />
           </div>
-          <Button variant="contained" color="primary" style={{ margin: '10px' }}>
+          <Button variant="contained" color="primary" style={{ margin: '10px' }} onClick={this.onpreviewTemplate}>
             Preview Template
           </Button>
           <Button variant="contained" color="secondary" onClick={onClose}>

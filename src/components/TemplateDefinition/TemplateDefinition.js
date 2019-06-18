@@ -9,7 +9,7 @@ import templateDefinitionStyles from './TemplateDefinition.style'
 
 class TemplateDefinition extends Component {
   render() {
-    const { classes } = this.props
+    const { classes, previewDefinitionData } = this.props
     return (
       <TabContainer>
         <div className={classes.templateDefinitionContainer}>
@@ -18,13 +18,13 @@ class TemplateDefinition extends Component {
               label="Template Name"
               className={classes.textField}
               fullWidth
-              //value={selectedRow['companyName'] || ''}
+              value={previewDefinitionData.templateName || ''}
               margin="normal"
             />
             <TextField
               label="Template Version"
               className={classes.textField}
-              //value={selectedRow['jobType'] || ''}
+              value={previewDefinitionData.templateVersion.toString() || ''}
               margin="normal"
             />
           </form>

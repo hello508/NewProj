@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core'
 
 import { LOAD_PREVIEW_TEMPLATE_DATA, OPEN_MODAL } from '~/views/templates/templates.constants'
-import { getOpenModalData } from './templates.actions'
+import { getOpenModalData, getPreviewTemplateData } from './templates.actions'
 
 import { templatesSelector } from './templates.redux'
 import TabContainer from '~/components/TabContainer'
@@ -42,8 +42,15 @@ class TemplateTab extends Component {
     }))
   }
 
+  previewTemplate = (templateName, templateVersion) => {
+    this.props.getPreviewTemplateData(templateName, templateVersion)
+    this.setState((prevState) => ({
+      open: !prevState.open,
+    }))
+  }
+
   render() {
-    const { classes, selectedTemplateData } = this.props
+    const { classes, selectedTemplateData, previewRowData } = this.props
     return (
       <TabContainer>
         <Button variant="contained" color="primary" onClick={this.onOpenToggle}>
@@ -63,9 +70,10 @@ class TemplateTab extends Component {
           onClose={this.openToggle}
           onOpenToggle={this.onOpenToggle}
           selectedTemplateData={selectedTemplateData}
+          previewTemplate={this.previewTemplate}
         />
         <NewModal open={this.state.newOpen} onClose={this.onNewToggle} />
-        <InnerTemplate />
+        <InnerTemplate previewRowData={previewRowData} />
       </TabContainer>
     )
   }
@@ -75,5 +83,6 @@ export default connect(
   templatesSelector,
   {
     getOpenModalData,
+    getPreviewTemplateData,
   }
 )(withStyles(templateStyles)(TemplateTab))
