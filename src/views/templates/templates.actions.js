@@ -1,4 +1,4 @@
-import { LOAD_PREVIEW_TEMPLATE_DATA, OPEN_MODAL } from './templates.constants'
+import { LOAD_PREVIEW_TEMPLATE_DATA, LOAD_DEFAULT_TAB, LOAD_PREVIEW_TAB, OPEN_MODAL } from './templates.constants'
 
 import * as templateServices from './templates.service'
 
@@ -8,6 +8,17 @@ export function getPreviewTemplateData(name, version) {
       dispatch({
         type: LOAD_PREVIEW_TEMPLATE_DATA,
         previewRowData,
+      })
+    })
+  }
+}
+
+export function getDefaultTemplateData(name, version, body) {
+  return (dispatch) => {
+    templateServices.getDefaultTemplateData(name, version, body).then((jinjaData) => {
+      dispatch({
+        type: LOAD_DEFAULT_TAB,
+        jinjaData,
       })
     })
   }

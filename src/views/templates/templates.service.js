@@ -1,4 +1,4 @@
-import { templateData, previewData } from '~/common/constants'
+import { templateData, previewData, defaultsData } from '~/common/constants'
 //import { createPostRequest } from '~/common/http'
 
 export function getOpenModalData() {
@@ -8,4 +8,9 @@ export function getOpenModalData() {
 export function getPreviewTemplateData(name, version) {
   //return Promise.resolve(previewData({ name, version }))
   return Promise.resolve(previewData)
+}
+
+export function getDefaultTemplateData(name, version, body) {
+  //return Promise.resolve(previewData({ name, version }))
+  return Promise.resolve(defaultsData)
 }

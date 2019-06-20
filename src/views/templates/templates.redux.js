@@ -1,8 +1,9 @@
-import { LOAD_PREVIEW_TEMPLATE_DATA, OPEN_MODAL } from './templates.constants'
+import { LOAD_PREVIEW_TEMPLATE_DATA, LOAD_DEFAULT_TAB, OPEN_MODAL } from './templates.constants'
 
 const initialState = {
   selectedTemplateData: [],
   previewRowData: {},
+  defaultData: {},
 }
 
 export const templateReducer = (state = initialState, action) => {
@@ -11,6 +12,12 @@ export const templateReducer = (state = initialState, action) => {
       return {
         ...state,
         previewRowData: action.previewRowData,
+      }
+    }
+    case LOAD_DEFAULT_TAB: {
+      return {
+        ...state,
+        jinjaData: action.jinjaData.new_jinja_args,
       }
     }
     case OPEN_MODAL: {
