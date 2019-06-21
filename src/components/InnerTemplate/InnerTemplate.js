@@ -38,6 +38,10 @@ class InnerTemplate extends Component {
   }
 
   handleChange = (event, value) => {
+    if (value === 1 || 2) {
+      const { templateName, templateVersion, body } = this.state
+      this.props.defaultValuesTemplate(templateName, templateVersion, body)
+    }
     this.setState({ value })
   }
 
@@ -103,6 +107,7 @@ class InnerTemplate extends Component {
               onBCCFieldChange={this.onBCCFieldChange}
               onCCFieldChange={this.onCCFieldChange}
               onSubjectFieldChange={this.onSubjectFieldChange}
+              jinjaData={jinjaData}
             />
           )}
           {value === 2 && <PreviewValues />}

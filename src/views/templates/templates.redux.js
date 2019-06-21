@@ -3,7 +3,7 @@ import { LOAD_PREVIEW_TEMPLATE_DATA, LOAD_DEFAULT_TAB, OPEN_MODAL } from './temp
 const initialState = {
   selectedTemplateData: [],
   previewRowData: {},
-  defaultData: {},
+  jinjaData: {},
 }
 
 export const templateReducer = (state = initialState, action) => {
@@ -36,5 +36,6 @@ export const templatesSelector = (state) => {
   return {
     selectedTemplateData: state.templates.selectedTemplateData,
     previewRowData: state.templates.previewRowData,
+    jinjaData: state.templates.jinjaData,
   }
 }

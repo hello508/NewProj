@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core'
 
 import { LOAD_PREVIEW_TEMPLATE_DATA, OPEN_MODAL } from '~/views/templates/templates.constants'
-import { getOpenModalData, getPreviewTemplateData } from './templates.actions'
+import { getOpenModalData, getPreviewTemplateData, getDefaultTemplateData } from './templates.actions'
 
 import { templatesSelector } from './templates.redux'
 import TabContainer from '~/components/TabContainer'
@@ -49,8 +49,12 @@ class TemplateTab extends Component {
     }))
   }
 
+  defaultValuesTemplate = (templateName, templateVersion, body) => {
+    this.props.getDefaultTemplateData(templateName, templateVersion, body)
+  }
+
   render() {
-    const { classes, selectedTemplateData, previewRowData } = this.props
+    const { classes, selectedTemplateData, previewRowData, jinjaData } = this.props
     return (
       <TabContainer>
         <Button variant="contained" color="primary" onClick={this.onOpenToggle}>
@@ -73,7 +77,11 @@ class TemplateTab extends Component {
           previewTemplate={this.previewTemplate}
         />
         <NewModal open={this.state.newOpen} onClose={this.onNewToggle} />
-        <InnerTemplate previewRowData={previewRowData} />
+        <InnerTemplate
+          previewRowData={previewRowData}
+          defaultValuesTemplate={this.defaultValuesTemplate}
+          jinjaData={jinjaData}
+        />
       </TabContainer>
     )
   }
@@ -84,5 +92,6 @@ export default connect(
   {
     getOpenModalData,
     getPreviewTemplateData,
+    getDefaultTemplateData,
   }
 )(withStyles(templateStyles)(TemplateTab))
