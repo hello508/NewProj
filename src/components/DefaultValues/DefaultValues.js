@@ -18,6 +18,7 @@ const DefaultValues = (props) => {
     onCCFieldChange,
     onBCCFieldChange,
     onSubjectFieldChange,
+    jinjaArgs,
   } = props
   return (
     <TabContainer>
@@ -58,6 +59,11 @@ const DefaultValues = (props) => {
           onChange={onSubjectFieldChange}
           margin="normal"
         />
+        {Object.keys(jinjaArgs).map((key) => (
+          <div>
+            <TextField label={key} className={classes.textField} value={jinjaArgs[key]} margin="normal" />
+          </div>
+        ))}
       </form>
     </TabContainer>
   )

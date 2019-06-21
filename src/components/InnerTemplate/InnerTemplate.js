@@ -77,7 +77,7 @@ class InnerTemplate extends Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, jinjaData } = this.props
     const { value, to, cc, bcc, from, subject, templateName, templateVersion, body } = this.state
     return (
       <div className={classes.tabsContainer}>
@@ -107,7 +107,7 @@ class InnerTemplate extends Component {
               onBCCFieldChange={this.onBCCFieldChange}
               onCCFieldChange={this.onCCFieldChange}
               onSubjectFieldChange={this.onSubjectFieldChange}
-              jinjaData={jinjaData}
+              jinjaArgs={jinjaData}
             />
           )}
           {value === 2 && <PreviewValues />}
