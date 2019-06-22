@@ -20,3 +20,7 @@ export const previewData = {
 export const defaultsData = {
   new_jinja_args: { my_string: 'hello', hello_string: 'none', number_string: [0, 1, 2, 3, 4] },
 }
+
+export const previewModalData = {
+  body: '<html><head><title>Hello</title><body><p>Hello</p></body></head></html>',
+}

@@ -3,18 +3,29 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core'
 
 import { LOAD_PREVIEW_TEMPLATE_DATA, OPEN_MODAL } from '~/views/templates/templates.constants'
-import { getOpenModalData, getPreviewTemplateData, getDefaultTemplateData } from './templates.actions'
+import {
+  getOpenModalData,
+  getPreviewTemplateData,
+  getDefaultTemplateData,
+  submitPreviewFieldsData,
+} from './templates.actions'
 
 import { templatesSelector } from './templates.redux'
 import TabContainer from '~/components/TabContainer'
 import InnerTemplate from '~/components/InnerTemplate'
 import Button from '~/components/Button'
 import OpenModal from '~/components/OpenModal'
-import NewModal from '~/components/NewModal'
+import PreviewModal from '~/components/PreviewModal'
 import templateStyles from './templates.style'
 
 class TemplateTab extends Component {
   state = { open: false, newOpen: false, saveOpen: false, previewOpen: false }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.previewTemplateData !== prevProps.previewTemplateData) {
+      this.onPreviewToggle()
+    }
+  }
 
   onOpenToggle = () => {
     this.props.getOpenModalData()
@@ -38,8 +49,12 @@ class TemplateTab extends Component {
   onPreviewToggle = () => {
     this.setState((prevState) => ({
       ...prevState,
-      newOpen: !prevState.newOpen,
+      previewOpen: !prevState.previewOpen,
     }))
+  }
+
+  onPreviewClick = () => {
+    this.props.submitPreviewFieldsData(this.props.previewData)
   }
 
   previewTemplate = (templateName, templateVersion) => {
@@ -54,19 +69,19 @@ class TemplateTab extends Component {
   }
 
   render() {
-    const { classes, selectedTemplateData, previewRowData, jinjaData } = this.props
+    const { classes, selectedTemplateData, previewRowData, previewTemplateData } = this.props
     return (
       <TabContainer>
-        <Button variant="contained" color="primary" onClick={this.onOpenToggle}>
+        <Button variant="contained" color="primary" onClick={this.openToggle}>
           Open
         </Button>
-        <Button variant="contained" color="primary" onClick={this.onNewToggle}>
+        <Button variant="contained" color="primary">
           New
         </Button>
         <Button variant="contained" color="primary">
           Save
         </Button>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={this.onPreviewClick}>
           Preview
         </Button>
         <OpenModal
@@ -76,12 +91,12 @@ class TemplateTab extends Component {
           selectedTemplateData={selectedTemplateData}
           previewTemplate={this.previewTemplate}
         />
-        <NewModal open={this.state.newOpen} onClose={this.onNewToggle} />
-        <InnerTemplate
-          previewRowData={previewRowData}
-          defaultValuesTemplate={this.defaultValuesTemplate}
-          jinjaData={jinjaData}
+        <PreviewModal
+          open={this.state.previewOpen}
+          onClose={this.onPreviewToggle}
+          previewTemplateData={previewTemplateData}
         />
+        <InnerTemplate previewRowData={previewRowData} defaultValuesTemplate={this.defaultValuesTemplate} />
       </TabContainer>
     )
   }
@@ -93,5 +108,6 @@ export default connect(
     getOpenModalData,
     getPreviewTemplateData,
     getDefaultTemplateData,
+    submitPreviewFieldsData,
   }
 )(withStyles(templateStyles)(TemplateTab))

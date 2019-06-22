@@ -97,9 +97,10 @@ class CardsView extends Component {
     const { classes } = this.props
     return (
       <div className={classes.tabContentContainer}>
-        {tabData.map((data) => (
+        {tabData.map((data, index) => (
           <Card
             className={classes.cardContainer}
+            key={index}
             onClick={() => {
               this.props.history.push(`/tabs/${tab}/${data.groupName}`)
             }}

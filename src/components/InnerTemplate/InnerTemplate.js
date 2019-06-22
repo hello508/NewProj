@@ -107,7 +107,6 @@ class InnerTemplate extends Component {
               onBCCFieldChange={this.onBCCFieldChange}
               onCCFieldChange={this.onCCFieldChange}
               onSubjectFieldChange={this.onSubjectFieldChange}
-              jinjaArgs={jinjaData}
             />
           )}
           {value === 2 && <PreviewValues />}

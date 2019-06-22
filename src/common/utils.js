@@ -50,3 +50,21 @@ export function getColumns() {
   ].map((c) => ({ ...c, ...defaultColumnProperties }))
   return columns
 }
+
+export function getSaveColumns() {
+  const columns = [
+    {
+      key: 'firstName',
+      name: 'First Name',
+    },
+    {
+      key: 'lastName',
+      name: 'Last Name',
+    },
+    {
+      key: 'jobTitle',
+      name: 'Job Title',
+    },
+  ].map((c) => ({ ...c }))
+  return columns
+}

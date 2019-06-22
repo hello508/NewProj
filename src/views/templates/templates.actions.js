@@ -1,4 +1,12 @@
-import { LOAD_PREVIEW_TEMPLATE_DATA, LOAD_DEFAULT_TAB, LOAD_PREVIEW_TAB, OPEN_MODAL } from './templates.constants'
+import {
+  LOAD_PREVIEW_TEMPLATE_DATA,
+  LOAD_DEFAULT_TAB,
+  LOAD_PREVIEW_TAB,
+  OPEN_MODAL,
+  UPDATE_DEFAULT_DATA,
+  UPDATE_PREVIEW_DATA,
+  SUBMIT_PREVIEW_DATA,
+} from './templates.constants'
 
 import * as templateServices from './templates.service'
 
@@ -30,6 +38,37 @@ export function getOpenModalData() {
       dispatch({
         type: OPEN_MODAL,
         selectedTemplateData,
+      })
+    })
+  }
+}
+
+export function updateDefaultFieldsData(key, value) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_DEFAULT_DATA,
+      key,
+      value,
+    })
+  }
+}
+
+export function updatePreviewFieldsData(key, value) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_PREVIEW_DATA,
+      key,
+      value,
+    })
+  }
+}
+
+export function submitPreviewFieldsData(data) {
+  return (dispatch) => {
+    templateServices.submitPreviewFieldsData(data).then((previewTemplateData) => {
+      dispatch({
+        type: SUBMIT_PREVIEW_DATA,
+        previewTemplateData,
       })
     })
   }
