@@ -1,8 +1,8 @@
 export default {
   paper: {
-    width: 500,
+    width: 600,
     backgroundColor: '#ffffff',
     margin: 'auto',
-    height: '500px',
+    height: '700px',
   },
 }

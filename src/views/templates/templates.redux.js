@@ -5,6 +5,8 @@ import {
   UPDATE_DEFAULT_DATA,
   UPDATE_PREVIEW_DATA,
   SUBMIT_PREVIEW_DATA,
+  CLEAR_ALL_DATA,
+  SAVE_MODAL_DATA,
 } from './templates.constants'
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   jinjaData: {},
   previewData: {},
   previewTemplateData: {},
+  selectedSaveData: [],
 }
 
 export const templateReducer = (state = initialState, action) => {
@@ -68,6 +71,15 @@ export const templateReducer = (state = initialState, action) => {
         previewTemplateData: action.previewTemplateData,
       }
     }
+    case CLEAR_ALL_DATA: {
+      return initialState
+    }
+    case SAVE_MODAL_DATA: {
+      return {
+        ...state,
+        selectedSaveData: action.selectedSaveData,
+      }
+    }
     default: {
       return state
     }
@@ -78,7 +90,7 @@ export const templatesSelector = (state) => {
   return {
     selectedTemplateData: state.templates.selectedTemplateData,
     previewRowData: state.templates.previewRowData,
-    previewData: state.templates.previewData,
     previewTemplateData: state.templates.previewTemplateData,
+    selectedSaveData: state.templates.selectedSaveData,
   }
 }

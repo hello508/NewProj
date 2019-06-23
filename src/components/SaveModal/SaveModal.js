@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core'
+import TextField from '@material-ui/core/TextField'
 import Modal from '@material-ui/core/Modal'
-
-import SaveDataGrid from '../SaveGrid'
-
-import TextFields from '../DetailsContainer'
-import Button from '../Button'
 
 import { getSaveColumns } from '../../common/utils'
 
+import SaveDataGrid from '../SaveDataGrid'
+import Button from '../Button'
 import saveModalStyles from './SaveModal.style'
 
 class SaveModal extends Component {
@@ -21,13 +19,26 @@ class SaveModal extends Component {
   }
 
   render() {
+    const { classes, open, onClose, selectedSaveData } = this.props
     return (
-      <Modal>
-        <Button variant="contained" color="primary">
-          Save
-        </Button>
-        <SaveDataGrid columns={getSaveColumns()} onRowClicked={this.onRowClicked} />
-        <TextFields label="Template Name" />
+      <Modal open={open} onClose={onClose}>
+        <div className={classes.paper}>
+          <Button variant="contained" color="primary">
+            Save
+          </Button>
+          <SaveDataGrid
+            columns={getSaveColumns()}
+            onRowClicked={this.onRowClicked}
+            selectedSaveData={selectedSaveData}
+          />
+          <TextField
+            label="Template Name"
+            className={classes.textField}
+            // value={bcc || ''}
+            // onChange={onBCCFieldChange}
+            margin="normal"
+          />
+        </div>
       </Modal>
     )
   }

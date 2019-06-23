@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core'
 
-import { LOAD_PREVIEW_TEMPLATE_DATA, OPEN_MODAL } from '~/views/templates/templates.constants'
 import {
   getOpenModalData,
   getPreviewTemplateData,
   getDefaultTemplateData,
   submitPreviewFieldsData,
+  getSaveModalData,
+  clearAllData,
 } from './templates.actions'
 
 import { templatesSelector } from './templates.redux'
@@ -15,11 +16,12 @@ import TabContainer from '~/components/TabContainer'
 import InnerTemplate from '~/components/InnerTemplate'
 import Button from '~/components/Button'
 import OpenModal from '~/components/OpenModal'
+import SaveModal from '~/components/SaveModal'
 import PreviewModal from '~/components/PreviewModal'
 import templateStyles from './templates.style'
 
 class TemplateTab extends Component {
-  state = { open: false, newOpen: false, saveOpen: false, previewOpen: false }
+  state = { open: false, saveOpen: false, previewOpen: false }
 
   componentDidUpdate(prevProps) {
     if (this.props.previewTemplateData !== prevProps.previewTemplateData) {
@@ -27,23 +29,37 @@ class TemplateTab extends Component {
     }
   }
 
-  onOpenToggle = () => {
+  onOpenClick = () => {
     this.props.getOpenModalData()
-    this.openToggle()
+    this.onOpenToggle()
   }
 
-  openToggle = () => {
+  onOpenToggle = () => {
     this.setState((prevState) => ({
       ...prevState,
       open: !prevState.open,
     }))
   }
 
-  onNewToggle = () => {
+  onSaveClick = () => {
+    this.props.getSaveModalData()
+    this.onSaveToggle()
+  }
+
+  onSaveToggle = () => {
     this.setState((prevState) => ({
       ...prevState,
-      newOpen: !prevState.newOpen,
+      saveOpen: !prevState.saveOpen,
     }))
+  }
+
+  onNewClick = () => {
+    this.props.clearAllData()
+  }
+
+  onPreviewClick = () => {
+    this.props.submitPreviewFieldsData(this.props.previewData)
+    this.onPreviewToggle()
   }
 
   onPreviewToggle = () => {
@@ -51,10 +67,6 @@ class TemplateTab extends Component {
       ...prevState,
       previewOpen: !prevState.previewOpen,
     }))
-  }
-
-  onPreviewClick = () => {
-    this.props.submitPreviewFieldsData(this.props.previewData)
   }
 
   previewTemplate = (templateName, templateVersion) => {
@@ -69,28 +81,28 @@ class TemplateTab extends Component {
   }
 
   render() {
-    const { classes, selectedTemplateData, previewRowData, previewTemplateData } = this.props
+    const { classes, selectedTemplateData, previewRowData, previewTemplateData, selectedSaveData } = this.props
     return (
       <TabContainer>
-        <Button variant="contained" color="primary" onClick={this.openToggle}>
+        <Button variant="contained" color="primary" onClick={this.onOpenClick}>
           Open
         </Button>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={this.onNewClick}>
           New
         </Button>
-        <Button variant="contained" color="primary">
-          Save
+        <Button variant="contained" color="primary" onClick={this.onSaveClick}>
+          Save As
         </Button>
         <Button variant="contained" color="primary" onClick={this.onPreviewClick}>
           Preview
         </Button>
         <OpenModal
           open={this.state.open}
-          onClose={this.openToggle}
-          onOpenToggle={this.onOpenToggle}
+          onClose={this.onOpenToggle}
           selectedTemplateData={selectedTemplateData}
           previewTemplate={this.previewTemplate}
         />
+        <SaveModal open={this.state.saveOpen} onClose={this.onSaveToggle} selectedSaveData={selectedSaveData} />
         <PreviewModal
           open={this.state.previewOpen}
           onClose={this.onPreviewToggle}
@@ -108,6 +120,8 @@ export default connect(
     getOpenModalData,
     getPreviewTemplateData,
     getDefaultTemplateData,
+    getSaveModalData,
     submitPreviewFieldsData,
+    clearAllData,
   }
 )(withStyles(templateStyles)(TemplateTab))

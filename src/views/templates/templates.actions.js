@@ -1,11 +1,12 @@
 import {
   LOAD_PREVIEW_TEMPLATE_DATA,
   LOAD_DEFAULT_TAB,
-  LOAD_PREVIEW_TAB,
   OPEN_MODAL,
   UPDATE_DEFAULT_DATA,
   UPDATE_PREVIEW_DATA,
   SUBMIT_PREVIEW_DATA,
+  CLEAR_ALL_DATA,
+  SAVE_MODAL_DATA,
 } from './templates.constants'
 
 import * as templateServices from './templates.service'
@@ -69,6 +70,25 @@ export function submitPreviewFieldsData(data) {
       dispatch({
         type: SUBMIT_PREVIEW_DATA,
         previewTemplateData,
+      })
+    })
+  }
+}
+
+export function clearAllData() {
+  return (dispatch) => {
+    dispatch({
+      type: CLEAR_ALL_DATA,
+    })
+  }
+}
+
+export function getSaveModalData() {
+  return (dispatch) => {
+    templateServices.getSaveModalData().then((selectedSaveData) => {
+      dispatch({
+        type: SAVE_MODAL_DATA,
+        selectedSaveData,
       })
     })
   }

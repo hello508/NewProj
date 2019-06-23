@@ -6,7 +6,7 @@ class SaveDataGrid extends Component {
   state = { selectedIndexes: [], rowIndex: -1 }
 
   _rowGetter = (id) => {
-    return this.props.groupdData[id]
+    return this.props.selectedSaveData[id]
   }
 
   onRowClick = (rowIdx) => {
@@ -14,7 +14,7 @@ class SaveDataGrid extends Component {
       this.setState({
         rowIndex: rowIdx,
       })
-      this.props.onRowClicked(this.props.groupdData[rowIdx])
+      this.props.onRowClicked(this.props.selectedSaveData[rowIdx])
     }
   }
 
@@ -24,18 +24,18 @@ class SaveDataGrid extends Component {
   }
 
   render() {
-    const { columns, groupdData } = this.props
+    const { columns } = this.props
     return (
       <ReactDataGrid
         columns={columns}
         rowGetter={this._rowGetter}
-        rowsCount={this.groupdData.length}
-        minHeight={330}
+        rowsCount={this.props.selectedSaveData.length}
+        minHeight={400}
         onRowClick={this.onRowClick}
         rowRenderer={this.rowRenderer}
         rowSelection={{
           enableShiftSelect: false,
-          showCheckbox: true,
+          showCheckbox: false,
         }}
       />
     )

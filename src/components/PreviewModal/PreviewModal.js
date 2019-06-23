@@ -12,7 +12,7 @@ class PreviewModal extends Component {
         <div className={classes.paper}>
           <label>Preview</label>
           <div>
-            <textarea className="form-control" rows="15" value={previewTemplateData.body} />
+            <textarea className="form-control" rows="15" value={previewTemplateData.body} readOnly />
           </div>
         </div>
       </Modal>
