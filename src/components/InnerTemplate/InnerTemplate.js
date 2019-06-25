@@ -20,6 +20,7 @@ class InnerTemplate extends Component {
     cc: this.props.previewRowData.cc,
     from: this.props.previewRowData.from,
     subject: this.props.previewRowData.subject,
+    replyTo: this.props.previewRowData.replyTo,
   }
 
   componentDidUpdate(prevProps) {
@@ -33,6 +34,7 @@ class InnerTemplate extends Component {
         from: this.props.previewRowData.from,
         bcc: this.props.previewRowData.bcc,
         subject: this.props.previewRowData.subject,
+        replyTo: this.props.previewRowData.replyTo,
       })
     }
   }
@@ -76,9 +78,14 @@ class InnerTemplate extends Component {
     this.setState({ subject: value })
   }
 
+  onReplyToFieldChange = (e) => {
+    const value = e.currentTarget.value
+    this.setState({ replyTo: value })
+  }
+
   render() {
     const { classes, jinjaData } = this.props
-    const { value, to, cc, bcc, from, subject, templateName, templateVersion, body } = this.state
+    const { value, to, cc, bcc, from, subject, templateName, templateVersion, body, replyTo } = this.state
     return (
       <div className={classes.tabsContainer}>
         <div className={classes.root}>
@@ -107,6 +114,7 @@ class InnerTemplate extends Component {
               onBCCFieldChange={this.onBCCFieldChange}
               onCCFieldChange={this.onCCFieldChange}
               onSubjectFieldChange={this.onSubjectFieldChange}
+              onReplyToFieldChange={this.onReplyToFieldChange}
             />
           )}
           {value === 2 && <PreviewValues />}

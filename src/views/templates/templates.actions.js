@@ -7,6 +7,7 @@ import {
   SUBMIT_PREVIEW_DATA,
   CLEAR_ALL_DATA,
   SAVE_MODAL_DATA,
+  LOAD_CATEGORY_DATA,
 } from './templates.constants'
 
 import * as templateServices from './templates.service'
@@ -89,6 +90,17 @@ export function getSaveModalData() {
       dispatch({
         type: SAVE_MODAL_DATA,
         selectedSaveData,
+      })
+    })
+  }
+}
+
+export function getCategoryData() {
+  return (dispatch) => {
+    templateServices.getCategoryData().then((categoryData) => {
+      dispatch({
+        type: LOAD_CATEGORY_DATA,
+        categoryData,
       })
     })
   }

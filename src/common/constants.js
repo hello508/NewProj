@@ -15,6 +15,10 @@ export const previewData = {
   cc: ['harika@gmail.com', 'anil@gmail.com'],
   bcc: ['anil@gmail.com'],
   subject: 'This is test',
+  replyTo: 'harika1@gmail.com',
+  group: 'quackr',
+  batched: true,
+  instantAction: true,
 }
 
 export const defaultsData = {
@@ -24,3 +28,36 @@ export const defaultsData = {
 export const previewModalData = {
   body: '<html><head><title>Hello</title><body><p>Hello</p></body></head></html>',
 }
+
+export const categoryData = [
+  {
+    name: 'quackr',
+  },
+  {
+    name: 'FICC',
+  },
+  {
+    name: 'FICCDTG',
+  },
+  {
+    name: 'GBAM',
+  },
+]
+
+export const saveGridData = [
+  {
+    name: 'groupsix',
+    group: 'quackr',
+    version: '7',
+  },
+  {
+    name: 'groupseven',
+    group: 'FICCDTG',
+    version: '7',
+  },
+  {
+    name: 'groupeight',
+    group: 'GBAM',
+    version: '4',
+  },
+]

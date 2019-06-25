@@ -1,18 +1,11 @@
-import { templateData, previewData, defaultsData, previewModalData } from '~/common/constants'
-import faker from 'faker'
-
-function createFakeRow(index) {
-  return {
-    id: index,
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    jobTitle: faker.name.jobTitle(),
-  }
-}
-
-export default function createRowData(count) {
-  return [...Array(count).keys()].map((i) => createFakeRow(i))
-}
+import {
+  templateData,
+  previewData,
+  defaultsData,
+  previewModalData,
+  saveGridData,
+  categoryData,
+} from '~/common/constants'
 
 export function getOpenModalData() {
   return Promise.resolve(templateData)
@@ -34,5 +27,9 @@ export function submitPreviewFieldsData(data) {
 }
 
 export function getSaveModalData() {
-  return Promise.resolve(createRowData(100))
+  return Promise.resolve(saveGridData)
+}
+
+export function getCategoryData() {
+  return Promise.resolve(categoryData)
 }

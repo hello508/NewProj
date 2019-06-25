@@ -7,6 +7,7 @@ import {
   SUBMIT_PREVIEW_DATA,
   CLEAR_ALL_DATA,
   SAVE_MODAL_DATA,
+  LOAD_CATEGORY_DATA,
 } from './templates.constants'
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   previewData: {},
   previewTemplateData: {},
   selectedSaveData: [],
+  categoryData: [],
 }
 
 export const templateReducer = (state = initialState, action) => {
@@ -80,6 +82,12 @@ export const templateReducer = (state = initialState, action) => {
         selectedSaveData: action.selectedSaveData,
       }
     }
+    case LOAD_CATEGORY_DATA: {
+      return {
+        ...state,
+        categoryData: action.categoryData,
+      }
+    }
     default: {
       return state
     }
@@ -92,5 +100,7 @@ export const templatesSelector = (state) => {
     previewRowData: state.templates.previewRowData,
     previewTemplateData: state.templates.previewTemplateData,
     selectedSaveData: state.templates.selectedSaveData,
+    previewData: state.templates.previewData,
+    categoryData: state.templates.categoryData,
   }
 }

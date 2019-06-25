@@ -54,16 +54,16 @@ export function getColumns() {
 export function getSaveColumns() {
   const columns = [
     {
-      key: 'firstName',
-      name: 'First Name',
+      key: 'name',
+      name: 'Name',
     },
     {
-      key: 'lastName',
-      name: 'Last Name',
+      key: 'group',
+      name: 'Category',
     },
     {
-      key: 'jobTitle',
-      name: 'Job Title',
+      key: 'version',
+      name: 'Version',
     },
   ].map((c) => ({ ...c }))
   return columns

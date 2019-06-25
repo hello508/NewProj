@@ -9,6 +9,7 @@ import {
   submitPreviewFieldsData,
   getSaveModalData,
   clearAllData,
+  getCategoryData,
 } from './templates.actions'
 
 import { templatesSelector } from './templates.redux'
@@ -42,7 +43,7 @@ class TemplateTab extends Component {
   }
 
   onSaveClick = () => {
-    this.props.getSaveModalData()
+    this.onSaveModalAPICalls()
     this.onSaveToggle()
   }
 
@@ -51,6 +52,11 @@ class TemplateTab extends Component {
       ...prevState,
       saveOpen: !prevState.saveOpen,
     }))
+  }
+
+  onSaveModalAPICalls = () => {
+    this.props.getSaveModalData()
+    this.props.getCategoryData()
   }
 
   onNewClick = () => {
@@ -81,7 +87,14 @@ class TemplateTab extends Component {
   }
 
   render() {
-    const { classes, selectedTemplateData, previewRowData, previewTemplateData, selectedSaveData } = this.props
+    const {
+      classes,
+      selectedTemplateData,
+      previewRowData,
+      previewTemplateData,
+      selectedSaveData,
+      categoryData,
+    } = this.props
     return (
       <TabContainer>
         <Button variant="contained" color="primary" onClick={this.onOpenClick}>
@@ -102,7 +115,12 @@ class TemplateTab extends Component {
           selectedTemplateData={selectedTemplateData}
           previewTemplate={this.previewTemplate}
         />
-        <SaveModal open={this.state.saveOpen} onClose={this.onSaveToggle} selectedSaveData={selectedSaveData} />
+        <SaveModal
+          open={this.state.saveOpen}
+          onClose={this.onSaveToggle}
+          selectedSaveData={selectedSaveData}
+          categoryData={categoryData}
+        />
         <PreviewModal
           open={this.state.previewOpen}
           onClose={this.onPreviewToggle}
@@ -123,5 +141,6 @@ export default connect(
     getSaveModalData,
     submitPreviewFieldsData,
     clearAllData,
+    getCategoryData,
   }
 )(withStyles(templateStyles)(TemplateTab))
