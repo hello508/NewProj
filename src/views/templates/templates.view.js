@@ -6,10 +6,10 @@ import {
   getOpenModalData,
   getPreviewTemplateData,
   getJinjaTemplateData,
-  submitPreviewFieldsData,
   getSaveModalData,
-  clearAllData,
   getCategoryData,
+  submitPreviewFieldsData,
+  clearAllData,
 } from './templates.actions'
 
 import { templatesSelector } from './templates.redux'
@@ -64,7 +64,7 @@ class TemplateTab extends Component {
   }
 
   onPreviewClick = () => {
-    this.props.submitPreviewFieldsData(this.props.previewData, body)
+    this.props.submitPreviewFieldsData(this.props.previewData, this.props.previewRowData.body)
     this.onPreviewToggle()
   }
 
@@ -87,14 +87,7 @@ class TemplateTab extends Component {
   }
 
   render() {
-    const {
-      classes,
-      selectedTemplateData,
-      previewRowData,
-      previewTemplateData,
-      selectedSaveData,
-      categoryData,
-    } = this.props
+    const { classes, selectedTemplateData, previewTemplateData, selectedSaveData, categoryData } = this.props
     return (
       <TabContainer>
         <Button variant="contained" color="primary" onClick={this.onOpenClick}>

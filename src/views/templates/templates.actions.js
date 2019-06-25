@@ -67,9 +67,9 @@ export function updatePreviewFieldsData(key, value) {
   }
 }
 
-export function submitPreviewFieldsData(data) {
+export function submitPreviewFieldsData(data, body) {
   return (dispatch) => {
-    templateServices.submitPreviewFieldsData(data).then((previewTemplateData) => {
+    templateServices.submitPreviewFieldsData(data, body).then((previewTemplateData) => {
       dispatch({
         type: SUBMIT_PREVIEW_DATA,
         previewTemplateData,

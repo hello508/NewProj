@@ -21,8 +21,8 @@ export function getJinjaTemplateData(name, version, body) {
   return Promise.resolve(defaultsData)
 }
 
-export function submitPreviewFieldsData(data) {
-  //return Promise.resolve(previewData({ name, version }))
+export function submitPreviewFieldsData(data, body) {
+  //return Promise.resolve(previewData({ JinjaArgs: data, body }))
   return Promise.resolve(previewModalData)
 }
 
