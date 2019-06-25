@@ -8,6 +8,8 @@ import {
   CLEAR_ALL_DATA,
   SAVE_MODAL_DATA,
   LOAD_CATEGORY_DATA,
+  UPDATE_TEMPLATE_DATA,
+  UPDATE_DEFAULT_VALUES_DATA,
 } from './templates.constants'
 
 import * as templateServices from './templates.service'
@@ -23,9 +25,9 @@ export function getPreviewTemplateData(name, version) {
   }
 }
 
-export function getDefaultTemplateData(name, version, body) {
+export function getJinjaTemplateData(name, version, body) {
   return (dispatch) => {
-    templateServices.getDefaultTemplateData(name, version, body).then((jinjaData) => {
+    templateServices.getJinjaTemplateData(name, version, body).then((jinjaData) => {
       dispatch({
         type: LOAD_DEFAULT_TAB,
         jinjaData,
@@ -45,7 +47,7 @@ export function getOpenModalData() {
   }
 }
 
-export function updateDefaultFieldsData(key, value) {
+export function updateJinjatFieldsData(key, value) {
   return (dispatch) => {
     dispatch({
       type: UPDATE_DEFAULT_DATA,
@@ -102,6 +104,26 @@ export function getCategoryData() {
         type: LOAD_CATEGORY_DATA,
         categoryData,
       })
+    })
+  }
+}
+
+export function updateTemplateFieldsData(key, value) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_TEMPLATE_DATA,
+      key,
+      value,
+    })
+  }
+}
+
+export function updateDefaultFieldsData(key, value) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_DEFAULT_VALUES_DATA,
+      key,
+      value,
     })
   }
 }

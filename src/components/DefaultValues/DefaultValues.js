@@ -4,33 +4,18 @@ import TextField from '@material-ui/core/TextField'
 import Checkbox from '@material-ui/core/Checkbox'
 import { connect } from 'react-redux'
 
-import { updateDefaultFieldsData } from '~/views/templates/templates.actions'
+import { updateJinjatFieldsData, updateDefaultFieldsData } from '~/views/templates/templates.actions'
 
 import TabContainer from '../TabContainer'
 import defaultValuesStyles from './DefaultValues.style'
 
 class DefaultValues extends Component {
   onUpdateDefaultData = (e, key) => {
-    this.props.updateDefaultFieldsData(key, e.currentTarget.value)
+    this.props.updateJinjatFieldsData(key, e.currentTarget.value)
   }
 
   render() {
-    const {
-      classes,
-      to,
-      from,
-      cc,
-      bcc,
-      replyTo,
-      subject,
-      onToFieldChange,
-      onFromFieldChange,
-      onCCFieldChange,
-      onBCCFieldChange,
-      onSubjectFieldChange,
-      onReplyToFieldChange,
-      jinjaData,
-    } = this.props
+    const { classes, jinjaData, updateDefaultFieldsData, defaultRowData } = this.props
     return (
       <TabContainer>
         <label>Email Configuration</label>
@@ -39,43 +24,43 @@ class DefaultValues extends Component {
             <TextField
               label="TO"
               className={classes.textField}
-              value={to || ''}
-              onChange={onToFieldChange}
+              value={defaultRowData.to || ''}
+              onChange={(e) => updateDefaultFieldsData('to', e.currentTarget.value)}
               margin="normal"
             />
             <TextField
               label="From"
               className={classes.textField}
-              value={from || ''}
-              onChange={onFromFieldChange}
+              value={defaultRowData.from || ''}
+              onChange={(e) => updateDefaultFieldsData('from', e.currentTarget.value)}
               margin="normal"
             />
             <TextField
               label="CC"
               className={classes.textField}
-              value={cc || ''}
-              onChange={onCCFieldChange}
+              value={defaultRowData.cc || ''}
+              onChange={(e) => updateDefaultFieldsData('cc', e.currentTarget.value)}
               margin="normal"
             />
             <TextField
               label="BCC"
               className={classes.textField}
-              value={bcc || ''}
-              onChange={onBCCFieldChange}
+              value={defaultRowData.bcc || ''}
+              onChange={(e) => updateDefaultFieldsData('bcc', e.currentTarget.value)}
               margin="normal"
             />
             <TextField
               label="Subject"
               className={classes.textField}
-              value={subject || ''}
-              onChange={onSubjectFieldChange}
+              value={defaultRowData.subject || ''}
+              onChange={(e) => updateDefaultFieldsData('subject', e.currentTarget.value)}
               margin="normal"
             />
             <TextField
-              label="Subject"
+              label="Reply TO"
               className={classes.textField}
-              value={replyTo || ''}
-              onChange={onReplyToFieldChange}
+              value={defaultRowData.replyTo || ''}
+              onChange={(e) => updateDefaultFieldsData('replyTo', e.currentTarget.value)}
               margin="normal"
             />
           </div>
@@ -105,10 +90,11 @@ class DefaultValues extends Component {
 const defaultValuesSelector = (state) => {
   return {
     jinjaData: state.templates.jinjaData,
+    defaultRowData: state.templates.defaultRowData,
   }
 }
 
 export default connect(
   defaultValuesSelector,
-  { updateDefaultFieldsData }
+  { updateJinjatFieldsData, updateDefaultFieldsData }
 )(withStyles(defaultValuesStyles)(DefaultValues))

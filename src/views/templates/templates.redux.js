@@ -8,11 +8,14 @@ import {
   CLEAR_ALL_DATA,
   SAVE_MODAL_DATA,
   LOAD_CATEGORY_DATA,
+  UPDATE_TEMPLATE_DATA,
+  UPDATE_DEFAULT_VALUES_DATA,
 } from './templates.constants'
 
 const initialState = {
   selectedTemplateData: [],
   previewRowData: {},
+  defaultRowData: {},
   jinjaData: {},
   previewData: {},
   previewTemplateData: {},
@@ -26,6 +29,7 @@ export const templateReducer = (state = initialState, action) => {
       return {
         ...state,
         previewRowData: action.previewRowData,
+        defaultRowData: action.previewRowData,
       }
     }
     case LOAD_DEFAULT_TAB: {
@@ -86,6 +90,26 @@ export const templateReducer = (state = initialState, action) => {
       return {
         ...state,
         categoryData: action.categoryData,
+      }
+    }
+    case UPDATE_TEMPLATE_DATA: {
+      const { key, value } = action
+      return {
+        ...state,
+        previewRowData: {
+          ...state.previewRowData,
+          [key]: value,
+        },
+      }
+    }
+    case UPDATE_DEFAULT_VALUES_DATA: {
+      const { key, value } = action
+      return {
+        ...state,
+        defaultRowData: {
+          ...state.defaultRowData,
+          [key]: value,
+        },
       }
     }
     default: {

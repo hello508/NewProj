@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core'
 import {
   getOpenModalData,
   getPreviewTemplateData,
-  getDefaultTemplateData,
+  getJinjaTemplateData,
   submitPreviewFieldsData,
   getSaveModalData,
   clearAllData,
@@ -64,7 +64,7 @@ class TemplateTab extends Component {
   }
 
   onPreviewClick = () => {
-    this.props.submitPreviewFieldsData(this.props.previewData)
+    this.props.submitPreviewFieldsData(this.props.previewData, body)
     this.onPreviewToggle()
   }
 
@@ -83,7 +83,7 @@ class TemplateTab extends Component {
   }
 
   defaultValuesTemplate = (templateName, templateVersion, body) => {
-    this.props.getDefaultTemplateData(templateName, templateVersion, body)
+    this.props.getJinjaTemplateData(templateName, templateVersion, body)
   }
 
   render() {
@@ -126,7 +126,7 @@ class TemplateTab extends Component {
           onClose={this.onPreviewToggle}
           previewTemplateData={previewTemplateData}
         />
-        <InnerTemplate previewRowData={previewRowData} defaultValuesTemplate={this.defaultValuesTemplate} />
+        <InnerTemplate defaultValuesTemplate={this.defaultValuesTemplate} />
       </TabContainer>
     )
   }
@@ -137,7 +137,7 @@ export default connect(
   {
     getOpenModalData,
     getPreviewTemplateData,
-    getDefaultTemplateData,
+    getJinjaTemplateData,
     getSaveModalData,
     submitPreviewFieldsData,
     clearAllData,
