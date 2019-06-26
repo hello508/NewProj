@@ -66,9 +66,15 @@ class DefaultValues extends Component {
           </div>
           <div className={classes.checkBoxContainer}>
             <label>Batched</label>
-            <Checkbox value="checkedD" />
+            <Checkbox
+              checked={defaultRowData.batched}
+              onChange={(e) => updateDefaultFieldsData('batched', e.currentTarget.checked)}
+            />
             <label>Action</label>
-            <Checkbox value="checkedD" />
+            <Checkbox
+              checked={defaultRowData.instantAction}
+              onChange={(e) => updateDefaultFieldsData('instantAction', e.currentTarget.checked)}
+            />
           </div>
           {Object.keys(jinjaData).map((key, index) => (
             <div key={index}>

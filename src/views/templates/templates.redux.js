@@ -35,7 +35,7 @@ export const templateReducer = (state = initialState, action) => {
     case LOAD_DEFAULT_TAB: {
       return {
         ...state,
-        jinjaData: action.jinjaData.new_jinja_args,
+        jinjaData: { ...action.jinjaData.new_jinja_args, ...state.jinjaData },
         previewData: Object.keys(action.jinjaData.new_jinja_args).reduce(
           (acc, key) => ({
             ...acc,

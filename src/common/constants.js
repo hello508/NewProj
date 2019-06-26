@@ -18,7 +18,8 @@ export const previewData = {
   replyTo: 'harika1@gmail.com',
   group: 'quackr',
   batched: true,
-  instantAction: true,
+  instantAction: false,
+  new_jinja_args: { my_string: 'hello', hello_string: 'none', number_string: [0, 1, 2, 3, 4] },
 }
 
 export const defaultsData = {
@@ -58,6 +59,11 @@ export const saveGridData = [
   {
     name: 'groupeight',
     group: 'GBAM',
+    version: '4',
+  },
+  {
+    name: 'groupeight',
+    group: 'quackr,FICC',
     version: '4',
   },
 ]
