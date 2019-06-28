@@ -10,12 +10,14 @@ import {
   LOAD_CATEGORY_DATA,
   UPDATE_TEMPLATE_DATA,
   UPDATE_DEFAULT_VALUES_DATA,
+  SUBMIT_SAVE_DATA,
 } from './templates.constants'
 
 const initialState = {
   selectedTemplateData: [],
   previewRowData: {},
   defaultRowData: {},
+  jinjaArgsData: {},
   jinjaData: {},
   previewData: {},
   previewTemplateData: {},
@@ -30,6 +32,7 @@ export const templateReducer = (state = initialState, action) => {
         ...state,
         previewRowData: action.previewRowData,
         defaultRowData: action.previewRowData,
+        jinjaArgsData: action.previewRowData.jinja_args,
       }
     }
     case LOAD_DEFAULT_TAB: {
@@ -112,6 +115,14 @@ export const templateReducer = (state = initialState, action) => {
         },
       }
     }
+    case SUBMIT_SAVE_DATA: {
+      return {
+        ...state,
+        previewRowData: action.previewRowData,
+        defaultRowData: action.previewRowData,
+        jinjaArgsData: action.previewRowData.jinja_args,
+      }
+    }
     default: {
       return state
     }
@@ -124,7 +135,10 @@ export const templatesSelector = (state) => {
     previewRowData: state.templates.previewRowData,
     previewTemplateData: state.templates.previewTemplateData,
     selectedSaveData: state.templates.selectedSaveData,
+    defaultRowData: state.templates.defaultRowData,
     previewData: state.templates.previewData,
     categoryData: state.templates.categoryData,
+    jinjaData: state.templates.jinjaData,
+    jinjaArgsData: state.templates.jinjaArgsData,
   }
 }

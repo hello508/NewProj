@@ -127,3 +127,14 @@ export function updateDefaultFieldsData(key, value) {
     })
   }
 }
+
+export function submitSaveFieldsData(data) {
+  return (dispatch) => {
+    templateServices.submitSaveFieldsData(data).then((saveTemplateData) => {
+      dispatch({
+        type: SUBMIT_SAVE_DATA,
+        saveTemplateData,
+      })
+    })
+  }
+}

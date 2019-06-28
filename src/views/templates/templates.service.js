@@ -5,6 +5,7 @@ import {
   previewModalData,
   saveGridData,
   categoryData,
+  saveButtonData,
 } from '~/common/constants'
 
 export function getOpenModalData() {
@@ -32,4 +33,8 @@ export function getSaveModalData() {
 
 export function getCategoryData() {
   return Promise.resolve(categoryData)
+}
+
+export function submitSaveFieldsData(data) {
+  return Promise.resolve(saveButtonData)
 }

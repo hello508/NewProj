@@ -17,9 +17,10 @@ export const previewData = {
   subject: 'This is test',
   replyTo: 'harika1@gmail.com',
   group: 'quackr',
+  tags: 'manrs,testdata,hello',
   batched: true,
   instantAction: false,
-  new_jinja_args: { my_string: 'hello', hello_string: 'none', number_string: [0, 1, 2, 3, 4] },
+  jinja_args: { my_string: 'hello', hello_string: 'none', number_string: [0, 1, 2, 3, 4] },
 }
 
 export const defaultsData = {
@@ -67,3 +68,20 @@ export const saveGridData = [
     version: '4',
   },
 ]
+
+export const saveButtonData = {
+  templateName: 'groupsix',
+  templateVersion: 2,
+  body: '<html><head><title>Hello</title><body><p>{{my_string}}</p><h1>second heading</h1></body></head></html>',
+  to: 'harika@gmail.com',
+  from: ['anil@gmail.com', 'mom@gmail.com'],
+  cc: ['harika@gmail.com', 'anil@gmail.com'],
+  bcc: ['anil@gmail.com'],
+  subject: 'This is test',
+  replyTo: 'harika1@gmail.com',
+  group: 'quackr',
+  batched: true,
+  instantAction: false,
+  tags: 'testdata,hello',
+  jinja_args: { my_string: 'hello', hello_string: 'hai' },
+}

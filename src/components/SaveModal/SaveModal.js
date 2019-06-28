@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 
 import { templatesSelector } from '~/views/templates/templates.redux'
 import {
-  getOpenModalData,
   getPreviewTemplateData,
   getJinjaTemplateData,
   updateTemplateFieldsData,
@@ -23,11 +22,13 @@ class SaveModal extends Component {
   state = {
     selectedRow: {},
     templateName: this.props.previewRowData.templateName,
+    group: this.props.previewRowData.group,
     categoryName: this.props.categoryData.map((selectedCategoryRow) => ({
       value: selectedCategoryRow.name,
       label: selectedCategoryRow.name,
     })),
     selectedCategoryName: null,
+    rowClicked: false,
   }
 
   componentDidUpdate = (prevProps) => {
@@ -41,25 +42,68 @@ class SaveModal extends Component {
     }
   }
 
-  onCategoryNameChange = (selectedValue) => {
-    this.setState({
-      selectedCategoryName: selectedValue,
-    })
-  }
-
   onRowClicked = (row) => {
+    const data = row.group
+    const groupData = data.split(',')
+    const myList = Object.keys(groupData).map((key) => ({
+      label: groupData[key],
+      value: groupData[key],
+    }))
     this.setState({
       selectedRow: row,
       templateName: this.props.updateTemplateFieldsData('templateName', row.name),
+      group: this.props.updateTemplateFieldsData('group', myList),
+      rowClicked: true,
     })
+  }
+
+  onCategoryNameChange = (selectedValue) => {
+    this.setState({ selectedCategoryName: this.props.updateTemplateFieldsData('group', selectedValue) })
+  }
+
+  onSaveClick = () => {
+    this.onSaveDataFormat()
+    this.props.onClose()
+  }
+
+  onSaveDataFormat = () => {
+    const { previewRowData, defaultRowData, jinjaData } = this.props
+    const group = previewRowData.group
+    const mapGroup = group.map((item) => item.value)
+    const joinGroup = mapGroup.join()
+    const data = {
+      name: previewRowData.name,
+      body: previewRowData.body,
+      group: joinGroup,
+      tags: previewRowData.tags,
+      to: defaultRowData.to,
+      cc: defaultRowData.cc,
+      bcc: defaultRowData.bcc,
+      subject: defaultRowData.subject,
+      batched: defaultRowData.batched,
+      instantAction: defaultRowData.instantAction,
+      JinjaArgs: jinjaData,
+    }
   }
 
   render() {
     const { classes, open, onClose, selectedSaveData, previewRowData, updateTemplateFieldsData } = this.props
+    let { rowSelected } = this.state
+    let groupVal = previewRowData.group
+    try {
+      if (groupVal !== undefined && !rowSelected) {
+        groupVal = groupVal.split(',').map((v) => {
+          return { value: v, label: v }
+        })
+      }
+    } catch (err) {
+      console.log(`${groupVal}`)
+    }
+
     return (
       <Modal open={open} onClose={onClose}>
         <div className={classes.paper}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={this.onSaveClick}>
             Save
           </Button>
           <SaveDataGrid
@@ -72,7 +116,7 @@ class SaveModal extends Component {
             isMulti
             onChange={this.onCategoryNameChange}
             options={this.state.categoryName}
-            value={this.state.selectedCategoryName}
+            value={groupVal}
             className="basic-multi-select"
             classNamePrefix="select"
           />
@@ -92,7 +136,6 @@ class SaveModal extends Component {
 export default connect(
   templatesSelector,
   {
-    getOpenModalData,
     getPreviewTemplateData,
     getJinjaTemplateData,
     updateTemplateFieldsData,

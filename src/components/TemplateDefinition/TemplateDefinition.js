@@ -26,6 +26,13 @@ const TemplateDefinition = ({ classes, previewRowData, updateTemplateFieldsData 
             value={previewRowData.templateVersion || ''}
             margin="normal"
           />
+          <TextField
+            label="Tags"
+            className={classes.textField}
+            value={previewRowData.tags || ''}
+            onChange={(e) => updateTemplateFieldsData('tags', e.currentTarget.value)}
+            margin="normal"
+          />
         </form>
         <label className={classes.templateBody}>Body</label>
         <div>
