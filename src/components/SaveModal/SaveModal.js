@@ -10,6 +10,7 @@ import {
   getPreviewTemplateData,
   getJinjaTemplateData,
   updateTemplateFieldsData,
+  submitSaveFieldsData,
 } from '~/views/templates/templates.actions'
 
 import { getSaveColumns } from '../../common/utils'
@@ -62,19 +63,19 @@ class SaveModal extends Component {
   }
 
   onSaveClick = () => {
-    this.onSaveDataFormat()
+    this.props.submitSaveFieldsData(this.onSaveDataFormat())
     this.props.onClose()
   }
 
   onSaveDataFormat = () => {
     const { previewRowData, defaultRowData, jinjaData } = this.props
-    const group = previewRowData.group
-    const mapGroup = group.map((item) => item.value)
-    const joinGroup = mapGroup.join()
+    // const group = previewRowData.group
+    // const mapGroup = group.map((item) => item.value)
+    // const joinGroup = mapGroup.join()
     const data = {
       name: previewRowData.name,
       body: previewRowData.body,
-      group: joinGroup,
+      group: previewRowData.group,
       tags: previewRowData.tags,
       to: defaultRowData.to,
       cc: defaultRowData.cc,
@@ -139,5 +140,6 @@ export default connect(
     getPreviewTemplateData,
     getJinjaTemplateData,
     updateTemplateFieldsData,
+    submitSaveFieldsData,
   }
 )(withStyles(saveModalStyles)(SaveModal))

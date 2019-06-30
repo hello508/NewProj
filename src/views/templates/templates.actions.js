@@ -132,8 +132,8 @@ export function submitSaveFieldsData(data) {
   return (dispatch) => {
     templateServices.submitSaveFieldsData(data).then((saveTemplateData) => {
       dispatch({
-        type: SUBMIT_SAVE_DATA,
-        saveTemplateData,
+        type: LOAD_PREVIEW_TEMPLATE_DATA,
+        previewRowData: saveTemplateData,
       })
     })
   }

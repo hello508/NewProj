@@ -79,7 +79,7 @@ export const saveButtonData = {
   bcc: ['anil@gmail.com'],
   subject: 'This is test',
   replyTo: 'harika1@gmail.com',
-  group: 'quackr',
+  group: 'qmanrs, ficc dtg',
   batched: true,
   instantAction: false,
   tags: 'testdata,hello',
