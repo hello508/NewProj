@@ -89,10 +89,10 @@ class SaveModal extends Component {
 
   render() {
     const { classes, open, onClose, selectedSaveData, previewRowData, updateTemplateFieldsData } = this.props
-    let { rowSelected } = this.state
+    let { rowClicked } = this.state
     let groupVal = previewRowData.group
     try {
-      if (groupVal !== undefined && !rowSelected) {
+      if (groupVal !== undefined && !rowClicked) {
         groupVal = groupVal.split(',').map((v) => {
           return { value: v, label: v }
         })

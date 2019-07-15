@@ -2,15 +2,16 @@
   "name": "ReactAPP",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "webpack.config.babel.js",
   "scripts": {
-    "start": "webpack-dev-server --hot"
+    "start": "node ./app.js webpack-dev-server --hot"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "express": "^4.17.1",
     "faker": "^4.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

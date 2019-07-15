@@ -33,6 +33,7 @@ class HomeView extends Component {
   container = null
   componentDidMount() {
     this._refreshData()
+    console.log(this.props.location.search)
   }
 
   componentDidUpdate(prevProps) {
