@@ -10,6 +10,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   devtool: 'source-map',
   resolve: {
@@ -35,4 +36,7 @@ module.exports = {
     ],
   },
   plugins: [new HtmlWebpackPlugin(), new webpack.NamedModulesPlugin()],
+  devServer: {
+    historyApiFallback: true,
+  },
 }

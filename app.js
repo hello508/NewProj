@@ -7,6 +7,5 @@ app.use(express.static(path.join(__dirname, 'dist')))
 
 // Handles any requests that don't match the ones above
 app.use('*', express.static(path.join(__dirname, 'index.html', 'dist')))
-// app.get('*', function(req, res) {
-//   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
-// })
+
+app.listen(process.env.PORT || 4000)

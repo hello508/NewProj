@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import ReactDataGrid, { Row } from 'react-data-grid'
 import { Toolbar, Data } from 'react-data-grid-addons'
 import { withStyles } from '@material-ui/core'
+import queryString from 'query-string'
 
 const selectors = Data.Selectors
 
@@ -119,9 +121,15 @@ class DataGrid extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const query = queryString.parse(ownProps.location.search)
   return {
-    rows: state.home[ownProps.rowKey],
+    rows: (state.home[ownProps.rowKey] || []).filter((row) => {
+      if (query.id) {
+        return row.id.toString() === query.id.toString()
+      }
+      return true
+    }),
   }
 }
 
-export default connect(mapStateToProps)(DataGrid)
+export default withRouter(connect(mapStateToProps)(DataGrid))
