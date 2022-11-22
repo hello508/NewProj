@@ -15,7 +15,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-data-grid": "^6.1.0",
-    "react-data-grid-addons": "^6.1.0",
+    "react-data-grid-addons": "^7.0.0-alpha.24",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.4",
     "react-redux": "^7.0.3",
